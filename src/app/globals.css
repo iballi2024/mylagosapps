@@ -1,0 +1,40 @@
+@import "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+@import "tailwindcss";
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --mantine-color-primary-filled: #00bf63;
+  --mantine-color-primary-filled-hover: #00a3ff;
+  --mantine-primary-color-6: #bf2900;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  --mantine-color-primary-filled: var(--mantine-color-primary-filled);
+  --mantine-color-primary-filled-hover: var(--mantine-color-primary-filled-hover);
+  --mantine-primary-color-6: var(--mantine-primary-color-6);
+}
+
+@media (prefers-color-scheme:dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --mantine-color-primary-filled: #00bf63;
+    --mantine-color-primary-filled-hover: #00a3ff;
+    --mantine-primary-color-6: #bf2900;
+    /* --mantine-color-text: #ededed; */
+    --mantine-color-text: red;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
