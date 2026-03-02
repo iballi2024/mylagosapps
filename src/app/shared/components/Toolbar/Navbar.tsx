@@ -76,14 +76,15 @@ export default function Navbar() {
   return (
     <nav
       // className="shadow fixed w-full top-0 bg-transparent"
-      className={ scrolled ? `shadow fixed w-full top-0 bg-white` : `shadow-none fixed w-full top-0 bg-transparent` }
+      className={ scrolled ? `shadow fixed w-full top-0 bg-white z-99` : `shadow-none fixed w-full top-0 bg-transparent` }
       // className={ scrolled ? "shadow fixed w-full top-0 bg-white" : "shadow-none fixed w-full top-0 bg-transparent" }
       style={{
         // backgroundColor: isDark ? theme.colors.dark[7] : theme.white,
         backgroundColor: isDark ? theme.colors.dark[7] : (scrolled ? "#FFFFFF" : "transparent"),
       }}
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8"> */}
+      <div className="main-wrapper">
         <div className="flex items-center justify-between h-16 lg:h-20 relative text-sm">
           {/* Left: Logo */}
           <div className="shrink-0">

@@ -10,6 +10,7 @@ import Toolbar from "../shared/components/Toolbar/Index";
 import Image from "next/image";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
 import AppsLogosCarousel from "./AppsLogosCarousel";
+import AppCarousel from "./AppCarousel";
 
 export default function Home() {
   const theme = useMantineTheme();
@@ -47,15 +48,18 @@ export default function Home() {
     `,
         }}
       > */}
+
+      {/* , backgroundAttachment: "fixed"  */}
       <Box style={{ background: gradient }}>
         {/* <div className="|  bg-linear-to-br via-[#FFFFFF] from-[#52bda927] to-[#52bda927] | "> */}
         <section className="hero">
           {/* <div className="md:min-h-[80vh] max-w-8xl mx-auto |  bg-linear-to-br via-[#FFFFFF] from-[#52BDAA] to-[#52BDAA] | px-4 sm:px-6 lg:px-8"> */}
           {/*  min-h-[200vh] md:min-h-[120vh] */}
-          <div className="flex flex-col max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-12 gap-y-8 md:gap-x-4 items-center min-h-screen mt-30">
+          {/* <div className="flex flex-col max-w-8xl mx-auto px-4 sm:px-6 lg:px-8"> */}
+          <div className="flex flex-col main-wrapper">
+            <div className="lg:h-screen lg:max-h-200 | grid grid-cols-12 gap-y-8 md:gap-x-4 items-center mt-10">
               <div className="col-span-12 md:col-span-6 order-2 md:order-1">
-                <h1 className="ff-heading text-5xl md:text-8xl font-bold">
+                <h1 className="ff-heading text-5xl md:text-8xl font-bold md:mt-30">
                   Convenience and Value
                 </h1>
 
@@ -88,13 +92,13 @@ export default function Home() {
 
                 {/*  */}
 
-                <p className="text-lg md:text-xl max-w-[500px]">
+                <p className="text-lg md:text-xl max-w-[500px] md:leading-8.5">
                   From island to mainland, order food, move around, shop, and
                   get things done, all from one app built for the real Lagos
                   experience.
                 </p>
 
-                <div className="my-8"></div>
+                <div className="my-6 md:my-10"></div>
 
                 <PrimaryBtn
                   title="Download the App"
@@ -103,7 +107,7 @@ export default function Home() {
                 />
               </div>
               <div className="col-span-12 md:col-span-6 xbg-red-400 order-1 md:order-2">
-                <div className="bg-blue-300 w-full max-w-[500px] mx-auto overflow-hidden rounded-xl">
+                <div className="bg-gray-100 w-full max-w-95 mx-auto overflow-hidden rounded-xl mt-16 md:mt-0">
                   <Image
                     src="/assets/images/joyful-black-male-female-best-friends-have-fun-together-take-picture-themselves-pose-making-selfie-being-good-mood-after-successful-day.png"
                     width={1640}
@@ -116,13 +120,122 @@ export default function Home() {
           </div>
         </section>
         <div className="my-20"></div>
-        <section className="py-8">
-          <h2 className="ff-heading text-2xl md:text-4xl font-bold text-center">
+        <section className="pb-16">
+          <h2 className="ff-heading text-2xl md:text-4xl font-bold text-center mb-6">
             Apps That Power Daily Life in Lagos
           </h2>
 
-          <AppsLogosCarousel />
+          {/* <AppsLogosCarousel />
+
+          <hr /> */}
+          <AppCarousel />
         </section>
+
+        <Box
+          style={{
+            background:
+              colorScheme === "dark"
+                ? ``
+                : `#F9F8FE`,
+          }}
+        >
+          <section className="py-16">
+            <div className="main-wrapper grid grid-cols-12 gap-y-12 md:gap-6">
+              <div className="col-span-12 md:col-span-7">
+                <h2 className="ff-heading text-2xl md:text-6xl font-semibold mb-5">
+                  Meet the LagosApps Ecosystem
+                </h2>
+                <p className="text-lg max-w-[700px] md:leading-8.5">
+                  LagosApps brings together the services Lagosians use every day
+                  into one connected ecosystem designed for real life in Lagos.
+                  Whether you’re ordering hot meals through Mainlandmeals,
+                  booking reliable transport with Vanlagos, powering your home
+                  or office via Mainlandsolar, or shopping fresh groceries from
+                  Lagoscarts, LagosApps simplifies your day. From Island to
+                  Mainland, we help you move, eat, shop, and live smarter — all
+                  from one trusted network.
+                </p>
+                <div className="my-6 md:my-10"></div>
+
+                <PrimaryBtn
+                  title="Download the App"
+                  handleEvent={() => alert("Download the App")}
+                  size="xl"
+                />
+              </div>
+              <div className="col-span-12 md:col-span-5 xbg-red-400 order-1 md:order-2">
+                <ul className="flex flex-col gap-y-6">
+                  <li className="flex flex-col md:flex-row md:items-start gap-4">
+                    <div className="w-16 min-w-16 max-w-16 p-4 bg-white shadow rounded-lg">
+                      <Image
+                        src="/assets/icons/icon-everyday-convinience.svg"
+                        alt="Everyday convenience"
+                        width={25}
+                        height={25}
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="ff-heading text-2xl font-extrabold mb-2">
+                        Everyday Convenience
+                      </h3>
+                      <p className="text-lg">
+                        Order food, shop groceries, hire a van, or get solar
+                        solutions without switching platforms. We bring
+                        essential services together so you can get more done
+                        with less stress.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex flex-col md:flex-row md:items-start gap-4">
+                    <div className="w-16 min-w-16 max-w-16 p-4 bg-white shadow rounded-lg">
+                      <Image
+                        src="/assets/icons/icon-reliable-local-solutions.svg"
+                        alt="Everyday convenience"
+                        width={25}
+                        height={25}
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="ff-heading text-2xl font-extrabold mb-2">
+                        Reliable Local Solutions
+                      </h3>
+                      <p className="text-lg">
+                        Built specifically for the Lagos environment, our
+                        services understand traffic, power needs, neighborhood
+                        logistics, and real-time delivery challenges — so you
+                        don’t have to.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex flex-col md:flex-row md:items-start gap-4">
+                    <div className="w-16 min-w-16 max-w-16 p-4 bg-white shadow rounded-lg">
+                      <Image
+                        src="/assets/icons/icon-service-that-makes-sense.svg"
+                        alt="Everyday convenience"
+                        width={25}
+                        height={25}
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="ff-heading text-2xl font-extrabold mb-2">
+                        Value That Makes Sense
+                      </h3>
+                      <p className="text-lg">
+                        Transparent pricing, trusted vendors, and dependable
+                        service ensure you get quality and affordability every
+                        time you use LagosApps.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </Box>
+
         {/* </div> */}
       </Box>
       {/* </MantineProvider> */}
@@ -133,7 +246,7 @@ export default function Home() {
         Button
       </Button> */}
 
-      <div className="min-h-[90vh]">
+      <div className="hidden min-h-[90vh]">
         {/* <div className="p-6 bg-amber-300 font-extrabold text-3xl"> */}
         <div className="p-6 font-extrabold text-3xl">
           <div className="bg-primary-200">Hello</div>
