@@ -2,33 +2,44 @@
 import {
   Box,
   Button,
-  MantineProvider,
-  useMantineTheme,
-  useComputedColorScheme,
+  Grid,
+  Text,
 } from "@mantine/core";
 import Toolbar from "../shared/components/Toolbar/Index";
-import Image from "next/image";
+import { Image } from "@mantine/core";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
 import AppsLogosCarousel from "./AppsLogosCarousel";
 import AppCarousel from "./AppCarousel";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { Product, products } from "./app-content-list";
+import ProductsSlider from "./ProductsSlider";
+import SubscriptionPlans from "./SubscriptionPlans/Index";
+import Footer from "../shared/Footer/Index";
+import { useGlobal } from "../context/globalStore";
+
+const list = [
+  "Faster access to essential services",
+  "Local businesses supporting local communities",
+  "Seamless ordering and booking process",
+  "Customer support that understands Lagos",
+];
 
 export default function Home() {
-  const theme = useMantineTheme();
-  const colorScheme = useComputedColorScheme();
+  const { theme, colorScheme } = useGlobal();
 
   const gradient =
     colorScheme === "dark"
       ? `linear-gradient(
         to bottom right,
-        ${theme.colors.teal[9]}20,
-        ${theme.colors.dark[8]},
-        ${theme.colors.teal[9]}20
+        ${theme?.colors.teal[9]}20,
+        ${theme?.colors.dark[8]},
+        ${theme?.colors.teal[9]}20
       )`
       : `linear-gradient(
         to bottom right,
-        ${theme.colors.teal[0]},
-        ${theme.white},
-        ${theme.colors.teal[0]}
+        ${theme?.colors.teal[0]},
+        ${theme?.white},
+        ${theme?.colors.teal[0]}
       )`;
 
   return (
@@ -50,7 +61,7 @@ export default function Home() {
       > */}
 
       {/* , backgroundAttachment: "fixed"  */}
-      <Box style={{ background: gradient }}>
+      <Box pb={{ base: "100px", xl: "100px" }} style={{ background: gradient }}>
         {/* <div className="|  bg-linear-to-br via-[#FFFFFF] from-[#52bda927] to-[#52bda927] | "> */}
         <section className="hero">
           {/* <div className="md:min-h-[80vh] max-w-8xl mx-auto |  bg-linear-to-br via-[#FFFFFF] from-[#52BDAA] to-[#52BDAA] | px-4 sm:px-6 lg:px-8"> */}
@@ -119,9 +130,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
         <div className="my-20"></div>
         <section className="pb-16">
-          <h2 className="ff-heading text-2xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-6 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center">
             Apps That Power Daily Life in Lagos
           </h2>
 
@@ -133,19 +146,16 @@ export default function Home() {
 
         <Box
           style={{
-            background:
-              colorScheme === "dark"
-                ? ``
-                : `#F9F8FE`,
+            background: colorScheme === "dark" ? `` : `#F9F8FE`,
           }}
         >
-          <section className="py-16">
+          <section className="py-16 lg:py-24">
             <div className="main-wrapper grid grid-cols-12 gap-y-12 md:gap-6">
               <div className="col-span-12 md:col-span-7">
                 <h2 className="ff-heading text-2xl md:text-6xl font-semibold mb-5">
                   Meet the LagosApps Ecosystem
                 </h2>
-                <p className="text-lg max-w-[700px] md:leading-8.5">
+                <p className="text-lg max-w-175 md:leading-8.5">
                   LagosApps brings together the services Lagosians use every day
                   into one connected ecosystem designed for real life in Lagos.
                   Whether you’re ordering hot meals through Mainlandmeals,
@@ -237,8 +247,143 @@ export default function Home() {
         </Box>
 
         {/* </div> */}
+
+        <div className="my-20"></div>
+
+        <section>
+          <div className="main-wrapper">
+            <h2 className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-16 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center">
+              What You Can Do on LagosApp
+            </h2>
+
+            {/* <ProductsSlider colorScheme={colorScheme ?? "light"} /> */}
+            <ProductsSlider/>
+            <div className="py-20"></div>
+            <SubscriptionPlans colorScheme={colorScheme ?? "light"} />
+            <div className="py-20"></div>
+
+            <Grid>
+              <Grid.Col span={{ sx: 12, md: 6 }}>
+                <h2 className="ff-heading max-w-[400px] text-2xl md:text-3xl xl:text-5xl font-bold mb-16 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center">
+                  What Benifit Will You Get
+                </h2>
+
+                <Box component="ul" my={20}>
+                  {list.map((feature, index) => (
+                    <Box
+                      component="li"
+                      key={index}
+                      mb={18}
+                      fw={600}
+                      className="text-lg flex gap-2 before:block before:content-[url('/assets/icons/icon-circle-check-mark.svg')]"
+                    >
+                      {feature}
+                    </Box>
+                  ))}
+                </Box>
+                <Text fw={700} size={"xl"}>
+                  Lagos moves fast. We help you move smarter.
+                </Text>
+              </Grid.Col>
+              <Grid.Col span={{ sx: 12, md: 6 }}>
+                <div className="max-w-md mx-auto rounded-2xl overflow-hidden">
+                  {/* 1800x2116 */}
+                  <Image
+                    src={"/assets/images/black-and-white-laptop.png"}
+                    width={1800}
+                    height={2116}
+                    alt="black and white laptop"
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
+
+            <div className="hidden grid grid-cols-12">
+              {products.map((prod: Product, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    // className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
+                    className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
+                    style={{
+                      backgroundColor: `#${prod.color?.pri}`,
+                      color: prod?.color?.sec
+                        ? `#${prod?.color?.sec}`
+                        : "white",
+                    }}
+                  >
+                    <div>
+                      <h3 className="ff-heading text-2xl md:text-3xl font-bold mb-4">
+                        {prod?.groupTitle}
+                      </h3>
+                      <ul className="list-disc marker:content-['.'] marker:block marker:text-7xl marker:leading-0 marker-top-3 ml-4 mb-6 md:text-xl">
+                        {prod.operations?.map((op, index: number) => (
+                          <li key={index} className="mb-3">
+                            {op}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <a
+                      href={prod.cta.url}
+                      target="_blank"
+                      aria-label="Visit app"
+                      className="flex ml-auto text-right gap-4 mt-6"
+                    >
+                      <FaArrowRightLong size={25} />
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* <div className="grid grid-cols-12">
+              {products.map((prod: Product, index: number) => {
+                console.log({ prod });
+                return (
+                  <div
+                    key={index}
+                    // className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
+                    className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
+                    style={{
+                      backgroundColor: `#${prod.color?.pri}`,
+                      color: prod?.color?.sec
+                        ? `#${prod?.color?.sec}`
+                        : "white",
+                    }}
+                  >
+                    <div>
+                      <h3 className="ff-heading text-2xl md:text-3xl font-bold mb-4">
+                        {prod?.groupTitle}
+                      </h3>
+                      <ul className="list-disc marker:content-['.'] marker:block marker:text-7xl marker:leading-0 marker-top-3 ml-4 mb-6 md:text-xl">
+                        {prod.operations?.map((op, index: number) => (
+                          <li key={index} className="mb-3">
+                            {op}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <a
+                      href={prod.cta.url}
+                      target="_blank"
+                      aria-label="Visit app"
+                      className="flex ml-auto text-right gap-4 mt-6"
+                    >
+                      <FaArrowRightLong size={25} />
+                    </a>
+                  </div>
+                );
+              })}
+            </div> */}
+          </div>
+        </section>
       </Box>
       {/* </MantineProvider> */}
+
+      {/* <div className="py-10"></div> */}
+
+      <Footer />
 
       {/* This is the Homepage
       <div></div>

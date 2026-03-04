@@ -11,9 +11,10 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./sass/main.scss";
 import { theme } from "./theming/mantine-theming";
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 // ‼️ import carousel styles after core package styles
-import '@mantine/carousel/styles.css';
+import "@mantine/carousel/styles.css";
+import { GlobalStoreProvider } from "./context/globalStore/global.store";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -58,7 +59,7 @@ export default function RootLayout({
         className={`${montserrat.variable} ${geistPoppins.variable} ${geistInter.variable} ${geistMono.variable} antialiased`}
       >
         <MantineProvider theme={theme} defaultColorScheme="auto">
-          {children}
+          <GlobalStoreProvider>{children}</GlobalStoreProvider>
         </MantineProvider>
       </body>
     </html>

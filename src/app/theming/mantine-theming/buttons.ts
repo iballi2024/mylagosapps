@@ -11,7 +11,8 @@ export const primaryButtonTheme = createTheme({
                     // padding: "0.5rem 1.5rem",
                     // height: "2.5rem",
                     fontSize: "inherit",
-                    zIndex: 0
+                    zIndex: 0,
+                    // color: "inherit",
                 },
             }
         },
