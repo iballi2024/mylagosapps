@@ -1,4 +1,4 @@
-import { createTheme } from "@mantine/core";
+import { Button, createTheme, TextInput } from "@mantine/core";
 
 export const theme = createTheme({
   // Controls --mantine-font-family
@@ -63,4 +63,73 @@ export const theme = createTheme({
       "#0A0E15", // 9 - darkest
     ],
   },
+
+  components: {
+    Button: {
+      styles: {
+        root: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 500,
+          borderRadius: "100vmax",
+          // padding: "0.5rem 1.5rem",
+          // height: "2.5rem",
+          fontSize: "inherit",
+          zIndex: 0,
+          // color: "inherit",
+        },
+        variants: {
+          filled: {
+            color: "white",
+            backgroundColor: "var(--color-primary-6)",
+          },
+          light: {
+            color: "var(--color-primary-6)",
+            backgroundColor: "white",
+          },
+          outline: {
+            color: "var(--color-primary-6)",
+            backgroundColor: "white",
+          },
+        },
+      },
+    },
+    TextInput: {
+      styles: {
+        label: {
+          fontFamily: "inherit",
+          fontWeight: 500,
+          fontSize: "inherit",
+          zIndex: 0,
+          color: "inherit",
+          textAlign: "left",
+          marginBottom: "0.5rem",
+        },
+        input: {
+          borderRadius: 5,
+          height: 45,
+          fontSize: "inherit",
+        },
+      },
+      
+    },
+    Textarea: {
+      styles: {
+        label: {
+          fontFamily: "inherit",
+          fontWeight: 500,
+          fontSize: "inherit",
+          zIndex: 0,
+          color: "inherit",
+          textAlign: "left",
+          marginBottom: "0.5rem",
+        },
+        input: {
+          borderRadius: 5,
+          fontSize: "inherit",
+        },
+      },
+    },
+  },
 });
+
+export { inputControlTheme } from "./inputControl";

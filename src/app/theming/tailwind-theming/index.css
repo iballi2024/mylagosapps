@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-0: #E6F7EF; /* 0 - very light */
+  --color-primary-1: #C2EED9; /* 1 */
+  --color-primary-2: #9DE5C3; /* 2 */
+  --color-primary-3: #79DBAD; /* 3 */
+  --color-primary-4: #54D297; /* 4 */
+  --color-primary-5: #30C881; /* 5 */
+  --color-primary-6: #0FA958; /* 6 - base */
+  --color-primary-7: #0B6B3A; /* 7 - darker */
+  --color-primary-8: #084F2B; /* 8 */
+  --color-primary-9: #05341C; /* 9 - darkest */
+  
+  --color-secondary-0: #FFF9E6; /* 0 - very light cream gold */
+  --color-secondary-1: #FFF1CC; /* 1 */
+  --color-secondary-2: #FFE8B3; /* 2 */
+  --color-secondary-3: #FFDE99; /* 3 */
+  --color-secondary-4: #FFD580; /* 4 */
+  --color-secondary-5: #F7C948; /* 5 - soft gold */
+  --color-secondary-6: #E6B800; /* 6 - primary gold */
+  --color-secondary-7: #C99700; /* 7 */
+  --color-secondary-8: #A67C00; /* 8 */
+  --color-secondary-9: #7A5C00; /* 9 - deep antique gold */
+
+  --color-dark-0: #F5F7FA; /* 0 - lightest */
+  --color-dark-1: #E6EAF2;
+  --color-dark-2: #C9D2E3;
+  --color-dark-3: #A5B4CF;
+  --color-dark-4: #7E93B8;
+  --color-dark-5: #4A5F7D;
+  --color-dark-6: #161C28; /* 6 - base color */
+  --color-dark-7: #121722;
+  --color-dark-8: #0E131C;  
+  --color-dark-9: #0A0E15; /* 9 - darkest */
+}

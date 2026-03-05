@@ -1,6 +1,8 @@
-import { Box, Grid, MantineTheme, Text } from "@mantine/core";
-import React from "react";
+import { Box, Flex, Grid, Text, Space } from "@mantine/core";
 import { useGlobal } from "../../context/globalStore";
+import UsersComments from "./UsersComments/Index";
+import { FaEnvelope } from "react-icons/fa6";
+import MessageWidget from "./MessageWidget/Index";
 
 export default function Footer() {
   const { theme, colorScheme } = useGlobal();
@@ -14,24 +16,26 @@ export default function Footer() {
           color: "white",
         })}
       >
-        <Grid className="main-wrapper">
+        <Grid gutter={{ base: 30, md: 30, lg: 50 }} className="main-wrapper">
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <Text
-              fw={400}
-              fz={{ base: 35, md: 45 }}
-              ta="left"
-              mb={{ base: 20, md: 30 }}
-              ff={"heading"}
-              style={() => ({
-                maxWidth: "450px",
-                lineHeight: 1.2,
-              })}
-            >
-              People are Saying About LagosApps
-            </Text>
-            <Text>Everything you need to accept to payment and grow your money of manage anywhere on planet</Text>
+            <UsersComments />
+            <Space h={40} />
+            <Box component="ul" display={"flex"} className="gap-3">
+              <Box component="li">
+                <Text fz={20} fw={700}>
+                  AppStore
+                </Text>
+              </Box>
+              <Box component="li">
+                <Text fz={20} fw={700}>
+                  GooglePay
+                </Text>
+              </Box>
+            </Box>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 6 }}>B</Grid.Col>
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <MessageWidget />
+          </Grid.Col>
         </Grid>
       </Box>
     </>
