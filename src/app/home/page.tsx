@@ -1,10 +1,5 @@
 "use client";
-import {
-  Box,
-  Button,
-  Grid,
-  Text,
-} from "@mantine/core";
+import { Box, Button, Grid, Text } from "@mantine/core";
 import Toolbar from "../shared/components/Toolbar/Index";
 import { Image } from "@mantine/core";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
@@ -16,6 +11,8 @@ import ProductsSlider from "./ProductsSlider";
 import SubscriptionPlans from "./SubscriptionPlans/Index";
 import Footer from "../shared/Footer/Index";
 import { useGlobal } from "../context/globalStore";
+import UsersFeedbacks from "./UsersFeedbacks/Index";
+import MessageWidget from "./MessageWidget/Index";
 
 const list = [
   "Faster access to essential services",
@@ -130,7 +127,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
 
         <div className="my-20"></div>
         <section className="pb-16">
@@ -257,7 +253,7 @@ export default function Home() {
             </h2>
 
             {/* <ProductsSlider colorScheme={colorScheme ?? "light"} /> */}
-            <ProductsSlider/>
+            <ProductsSlider />
             <div className="py-20"></div>
             <SubscriptionPlans colorScheme={colorScheme ?? "light"} />
             <div className="py-20"></div>
@@ -382,6 +378,24 @@ export default function Home() {
       {/* </MantineProvider> */}
 
       {/* <div className="py-10"></div> */}
+
+      <Box
+        component="section"
+        py={{ base: 40, lg: 80 }}
+        style={() => ({
+          backgroundColor: theme?.colors.dark[6],
+          color: "white",
+        })}
+      >
+        <Grid gutter={{ base: 30, md: 30, lg: 50 }} className="main-wrapper">
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <UsersFeedbacks />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <MessageWidget />
+          </Grid.Col>
+        </Grid>
+      </Box>
 
       <Footer />
 

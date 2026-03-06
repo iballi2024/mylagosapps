@@ -1,11 +1,10 @@
-import { Box, Flex, Grid, Text, Space } from "@mantine/core";
+import { Box, Grid, Image, Text } from "@mantine/core";
 import { useGlobal } from "../../context/globalStore";
-import UsersComments from "./UsersComments/Index";
-import { FaEnvelope } from "react-icons/fa6";
-import MessageWidget from "./MessageWidget/Index";
+import MessageWidget from "../../home/MessageWidget/Index";
+import UsersFeedbacks from "../../home/UsersFeedbacks/Index";
 
 export default function Footer() {
-  const { theme, colorScheme } = useGlobal();
+  const { theme } = useGlobal();
   return (
     <>
       <Box
@@ -16,27 +15,30 @@ export default function Footer() {
           color: "white",
         })}
       >
-        <Grid gutter={{ base: 30, md: 30, lg: 50 }} className="main-wrapper">
+        <Box className="main-wrapper">
+          <Grid>
+            <Grid.Col span={12}>
+              <Box className="max-w-50">
+                {/* <Image src="/assets/images/brand-logo-dark.svg" w="817" h="118" alt="brand logo" className="max-w-sm" /> */}
+                <Image src="/assets/images/brand-logo-dark.svg" width="817" height="118" alt="brand logo" className="max-w-sm" />
+              </Box>
+
+              <Box className="mt-10 text-sm">
+                <Text size="lg" fw={600} className="ff-heading text-white">
+                  Get started now to get new offers!
+                </Text>
+              </Box>
+            </Grid.Col>
+          </Grid>
+        </Box>
+        {/* <Grid gutter={{ base: 30, md: 30, lg: 50 }} className="main-wrapper">
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <UsersComments />
-            <Space h={40} />
-            <Box component="ul" display={"flex"} className="gap-3">
-              <Box component="li">
-                <Text fz={20} fw={700}>
-                  AppStore
-                </Text>
-              </Box>
-              <Box component="li">
-                <Text fz={20} fw={700}>
-                  GooglePay
-                </Text>
-              </Box>
-            </Box>
+            <UsersFeedbacks />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 6 }}>
             <MessageWidget />
           </Grid.Col>
-        </Grid>
+        </Grid> */}
       </Box>
     </>
   );

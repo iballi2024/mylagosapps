@@ -1,6 +1,6 @@
 "use client";
 import { Box, Flex, Image, Space, Text } from "@mantine/core";
-import { UserComment, usersComments } from "../users-comments";
+import { UserComment, usersComments } from "./users-comments";
 import { FaCaretRight } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
