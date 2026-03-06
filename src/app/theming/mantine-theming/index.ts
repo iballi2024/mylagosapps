@@ -1,6 +1,31 @@
-import { Button, createTheme, TextInput } from "@mantine/core";
+"use client";
+import {
+  Button,
+  createTheme,
+  defaultVariantColorsResolver,
+  MantineTheme,
+  TextInput,
+} from "@mantine/core";
+
+// const variantColorResolver = (input: any) => {
+//   const defaultResolved = defaultVariantColorsResolver(input);
+
+//   if (input.variant === "danger") {
+//     return {
+//       background: "green",
+//       hover: "darkred",
+//       color: "white",
+//       border: "none",
+//     };
+//   }
+
+//   return defaultResolved;
+// };
 
 export const theme = createTheme({
+  // Controls --mantine-variant-color-resolver
+  // variantColorResolver,
+
   // Controls --mantine-font-family
   // fontFamily: "Arial, sans-serif",
   fontFamily: "Poppins, sans-serif",
@@ -62,6 +87,42 @@ export const theme = createTheme({
       "#0E131C",
       "#0A0E15", // 9 - darkest
     ],
+    danger: [
+      "#FFE9E9", // 0 - very light
+      "#FFD3D3", // 1
+      "#FFB5B5", // 2
+      "#FF8787", // 3
+      "#FF6B6B", // 4
+      "#FA5252", // 5
+      "#E03131", // 6 - base danger
+      "#C92A2A", // 7
+      "#A61E1E", // 8
+      "#7A1212", // 9 - darkest
+    ],
+    accentBlue: [
+      "#EAF2FF", // 0
+      "#D6E4FF", // 1
+      "#ADC8FF", // 2
+      "#84A9FF", // 3
+      "#6690FF", // 4
+      "#3366FF", // 5
+      "#1F4FE0", // 6 - base
+      "#1939B7", // 7
+      "#132C8F", // 8
+      "#0D1F66", // 9
+    ],
+    accentTeal: [
+      "#E6FAF7", // 0
+      "#C2F1EA", // 1
+      "#9DE8DD", // 2
+      "#79DFD0", // 3
+      "#54D6C3", // 4
+      "#30CDB6", // 5
+      "#14B8A6", // 6 - base
+      "#0E8F82", // 7
+      "#0A6B61", // 8
+      "#054741", // 9
+    ],
   },
 
   components: {
@@ -93,25 +154,47 @@ export const theme = createTheme({
         },
       },
     },
+
     TextInput: {
-      styles: {
-        label: {
-          fontFamily: "inherit",
-          fontWeight: 500,
-          fontSize: "inherit",
-          zIndex: 0,
-          color: "inherit",
-          textAlign: "left",
-          marginBottom: "0.5rem",
-        },
-        input: {
-          borderRadius: 5,
-          height: 45,
-          fontSize: "inherit",
-        },
+      styles: (
+        theme: MantineTheme,
+        props: { variant?: string; color?: string },
+      ) => {
+        if (props.variant === "transparent") {
+          return {
+            input: {
+              borderColor: theme.colors.primary[6],
+              backgroundColor: props.variant,
+              color: props.color,
+            },
+            "&:hover": {
+              input: {
+                borderColor: theme.colors.red[6],
+                backgroundColor: theme.colors.red[0],
+                color: theme.colors.red[9],
+              },
+            },
+          };
+        }
+        return {
+          label: {
+            fontFamily: "inherit",
+            fontWeight: 500,
+            fontSize: "inherit",
+            zIndex: 0,
+            color: "inherit",
+            textAlign: "left",
+            marginBottom: "0.5rem",
+          },
+          input: {
+            borderRadius: 5,
+            height: 45,
+            fontSize: "inherit",
+          },
+        };
       },
-      
     },
+
     Textarea: {
       styles: {
         label: {

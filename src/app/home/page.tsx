@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Grid, Text } from "@mantine/core";
+import { Box, Button, Grid, Text, Title, Card } from "@mantine/core";
 import Toolbar from "../shared/components/Toolbar/Index";
 import { Image } from "@mantine/core";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
@@ -13,6 +13,8 @@ import Footer from "../shared/Footer/Index";
 import { useGlobal } from "../context/globalStore";
 import UsersFeedbacks from "./UsersFeedbacks/Index";
 import MessageWidget from "./MessageWidget/Index";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { TbRibbonHealth } from "react-icons/tb";
 
 const list = [
   "Faster access to essential services",
@@ -67,9 +69,21 @@ export default function Home() {
           <div className="flex flex-col main-wrapper">
             <div className="lg:h-screen lg:max-h-200 | grid grid-cols-12 gap-y-8 md:gap-x-4 items-center mt-10">
               <div className="col-span-12 md:col-span-6 order-2 md:order-1">
-                <h1 className="ff-heading text-5xl md:text-8xl font-bold md:mt-30">
+                {/* <h1 className="ff-heading text-5xl md:text-8xl font-bold md:mt-30">
                   Convenience and Value
-                </h1>
+                </h1> */}
+                {/* className="ff-heading text-5xl md:text-8xl font-bold md:mt-30" */}
+                {/* <Box component="h1" fz={'6rem'} fw={'600'} lh={1.1}>
+                  Convenience and Value
+                </Box> */}
+                <Title
+                  order={1}
+                  fz={{ base: "3rem", xs: "6rem" }}
+                  lh={1.1}
+                  className="font-bold md:mt-30"
+                >
+                  Convenience and Value
+                </Title>
 
                 {/*  */}
                 {/* <span className="block mt-8">
@@ -115,13 +129,74 @@ export default function Home() {
                 />
               </div>
               <div className="col-span-12 md:col-span-6 xbg-red-400 order-1 md:order-2">
-                <div className="bg-gray-100 w-full max-w-95 mx-auto overflow-hidden rounded-xl mt-16 md:mt-0">
-                  <Image
-                    src="/assets/images/joyful-black-male-female-best-friends-have-fun-together-take-picture-themselves-pose-making-selfie-being-good-mood-after-successful-day.png"
-                    width={1640}
-                    height={2068}
-                    alt="Vector 35"
-                  />
+                <div className="relative w-full h-full max-w-95 mx-auto">
+                  <Card
+                    pos={"absolute"}
+                    shadow="sm"
+                    // bdrs={{ lg: 30 }}
+                    className="z-10 top-4 left-2 right-2 lg:-left-20 lg:right-[unset] p-4"
+                    style={{
+                      // backgroundColor: colorScheme === "dark" ? theme?.colors.dark[6] : theme?.colors.accentTeal[6],
+                      // color: colorScheme === "dark" ? theme?.colors.dark[9] : "#0B1F1A",
+                      backgroundColor:
+                      colorScheme === "dark"
+                      ? theme?.colors.dark[6]
+                      : theme?.colors.primary[7],
+                      color: colorScheme === "dark" ? theme?.colors.dark[0] : theme?.colors.primary[0],
+                    }}
+                  >
+                    <Text
+                      fz={15}
+                      fw={600}
+                      display={"flex"}
+                      className="items-end gap-2"
+                    >
+                      <IoFastFoodOutline
+                        size={30}
+                        style={{
+                          color: theme?.colors.primary[0],
+                        }}
+                      />
+                      From Our Kitchen to Your Doorstep
+                    </Text>
+                  </Card>
+                  <Card
+                    pos={"absolute"}
+                    shadow="sm"
+                    // bdrs={{ lg: 30 }}
+                    style={{
+                      backgroundColor:
+                        colorScheme == "dark"
+                          ? theme?.colors.dark[6]
+                          : theme?.colors.accentBlue[7],
+                          // color: colorScheme == "dark" ? theme?.colors.dark[9] : theme?.colors.accentBlue[9],
+                          color: colorScheme == "dark" ? theme?.colors.dark[0] : theme?.colors.accentBlue[0],
+                    }}
+                    className="z-10 bottom-4 lg:bottom-[20%] left-2 right-2 lg:left-[unset] lg:-right-20 p-4"
+                  >
+                    <Text
+                      fz={15}
+                      fw={600}
+                      display={"flex"}
+                      className="items-end gap-2"
+                    >
+                      <TbRibbonHealth
+                        size={30}
+                        style={{
+                          color: theme?.colors.accentBlue[0],
+                        }}
+                      />
+                      Accessible Healthcare for Every Lagos Family
+                    </Text>
+                  </Card>
+                  <div className="z-0 relative bg-gray-100 overflow-hidden rounded-xl mt-16 md:mt-0">
+                    <Image
+                      src="/assets/images/joyful-black-male-female-best-friends-have-fun-together-take-picture-themselves-pose-making-selfie-being-good-mood-after-successful-day.png"
+                      width={1640}
+                      height={2068}
+                      alt="Vector 35"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -129,10 +204,13 @@ export default function Home() {
         </section>
 
         <div className="my-20"></div>
-        <section className="pb-16">
-          <h2 className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-6 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center">
+        <section>
+          <Title
+            order={2}
+            className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-6 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center"
+          >
             Apps That Power Daily Life in Lagos
-          </h2>
+          </Title>
 
           {/* <AppsLogosCarousel />
 
