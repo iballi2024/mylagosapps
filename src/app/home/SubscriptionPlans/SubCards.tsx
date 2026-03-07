@@ -28,9 +28,10 @@ export default function SubCards({
                 <Card
                   p={40}
                   //   withBorder
-                  shadow="sm"
+                  // shadow="sm"
                   h={"100%"}
                   bdrs={20}
+                  className="shadow-sm!"
                 >
                   <Title component="h4" size="xl" fw={"bold"} ta="center">
                     {item.title}
