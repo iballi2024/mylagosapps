@@ -148,11 +148,10 @@ export default function Footer() {
                           <Box
                             component="dd"
                             key={index}
-                            className="text-sm  leading-8"
+                            className="text-sm  leading-8 text-dark-3"
                           >
                             <Link
                               href={link.href}
-                              className="text-[#A6A6A6] hover:text-secondary-6"
                             >
                               {link.title}
                             </Link>
@@ -188,8 +187,12 @@ export default function Footer() {
               component="ul"
               className="md:max-w-70 ml-auto justify-between gap-8 p-0"
             >
-              <Box component="li">Terms of Service</Box>
-              <Box component="li">Privacy Policy</Box>
+              <Box component="li">
+                <Link href="/privacy">Terms of Service</Link>
+              </Box>
+              <Box component="li">
+                <Link href="/privacy">Privacy Policy</Link>
+              </Box>
             </Box>
           </Grid.Col>
         </Grid>
