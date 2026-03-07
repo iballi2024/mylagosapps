@@ -13,15 +13,9 @@ import Footer from "../shared/Footer/Index";
 import { useGlobal } from "../context/globalStore";
 import UsersFeedbacks from "./UsersFeedbacks/Index";
 import MessageWidget from "./MessageWidget/Index";
-import { IoFastFoodOutline } from "react-icons/io5";
-import { TbRibbonHealth, TbTruckDelivery } from "react-icons/tb";
-import { GiSolarPower } from "react-icons/gi";
-import { BsCreditCardFill } from "react-icons/bs";
 import HeroSection from "./HeroSection/Index";
 import LagosAppsEcosystemSection from "./LagosAppsEcosystemSection/Index";
-import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import BenefitSection from "./BenefitSection/Index";
-
 
 export default function Home() {
   const { theme, colorScheme } = useGlobal();
@@ -43,21 +37,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Toolbar */}
       <Toolbar />
-
-      {/* <MantineProvider theme={theme}> */}
-      {/* <Box
-        style={{
-          background: `
-      linear-gradient(
-        to bottom right,
-        var(--mantine-color-teal-0),
-        var(--mantine-color-body),
-        var(--mantine-color-teal-0)
-      )
-    `,
-        }}
-      > */}
+      {/*  */}
 
       <Box pb={{ base: "100px", xl: "100px" }} style={{ background: gradient }}>
         <HeroSection />
@@ -106,7 +88,6 @@ export default function Home() {
 
         <BenefitSection />
 
-
         <div className="hidden grid grid-cols-12">
           {products.map((prod: Product, index: number) => {
             return (
@@ -143,48 +124,7 @@ export default function Home() {
             );
           })}
         </div>
-
-        {/* <div className="grid grid-cols-12">
-              {products.map((prod: Product, index: number) => {
-                console.log({ prod });
-                return (
-                  <div
-                    key={index}
-                    // className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
-                    className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
-                    style={{
-                      backgroundColor: `#${prod.color?.pri}`,
-                      color: prod?.color?.sec
-                        ? `#${prod?.color?.sec}`
-                        : "white",
-                    }}
-                  >
-                    <div>
-                      <h3 className="ff-heading text-2xl md:text-3xl font-bold mb-4">
-                        {prod?.groupTitle}
-                      </h3>
-                      <ul className="list-disc marker:content-['.'] marker:block marker:text-7xl marker:leading-0 marker-top-3 ml-4 mb-6 md:text-xl">
-                        {prod.operations?.map((op, index: number) => (
-                          <li key={index} className="mb-3">
-                            {op}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <a
-                      href={prod.cta.url}
-                      target="_blank"
-                      aria-label="Visit app"
-                      className="flex ml-auto text-right gap-4 mt-6"
-                    >
-                      <FaArrowRightLong size={25} />
-                    </a>
-                  </div>
-                );
-              })}
-            </div> */}
       </Box>
-      {/* </MantineProvider> */}
 
       <Box
         component="section"

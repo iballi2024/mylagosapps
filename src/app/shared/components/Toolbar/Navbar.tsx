@@ -10,13 +10,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 import { Button } from "@mantine/core";
-import { primaryButtonTheme } from '../../../theming/mantine-theming/buttons';
-import PrimaryBtn from '../buttons/PrimaryBtn';
+import { primaryButtonTheme } from "../../../theming/mantine-theming/buttons";
+import PrimaryBtn from "../buttons/PrimaryBtn";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const theme = useMantineTheme();
+  const navigate = useRouter();
 
-  
   const [scrolled, setScrolled] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +38,11 @@ export default function Navbar() {
     setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
   };
 
-  
-  
+  const getStarted = () => {
+    // alert("Get Started!!");
+    navigate.push("/auth/signup");
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -68,19 +72,22 @@ export default function Navbar() {
 
   if (!mounted) return null;
 
-
-
-
-
-
   return (
     <nav
       // className="shadow fixed w-full top-0 bg-transparent"
-      className={ scrolled ? `shadow fixed w-full top-0 bg-white z-99` : `shadow-none fixed w-full top-0 bg-transparent` }
+      className={
+        scrolled
+          ? `shadow fixed w-full top-0 bg-white z-99`
+          : `shadow-none fixed w-full top-0 bg-transparent`
+      }
       // className={ scrolled ? "shadow fixed w-full top-0 bg-white" : "shadow-none fixed w-full top-0 bg-transparent" }
       style={{
         // backgroundColor: isDark ? theme.colors.dark[7] : theme.white,
-        backgroundColor: isDark ? theme.colors.dark[7] : (scrolled ? "#FFFFFF" : "transparent"),
+        backgroundColor: isDark
+          ? theme.colors.dark[7]
+          : scrolled
+            ? "#FFFFFF"
+            : "transparent",
       }}
     >
       {/* <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8"> */}
@@ -164,7 +171,7 @@ export default function Navbar() {
           {/* Right: Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              href="#"
+              href="/auth/login"
               className="text-[#A6A6A6] hover:text-green-600 font-medium"
             >
               Login
@@ -175,7 +182,7 @@ export default function Navbar() {
             >
               Get Started
             </Link> */}
-            <PrimaryBtn title="Get Started" handleEvent={() => alert("Get Started")} />
+            <PrimaryBtn title="Get Started" handleEvent={getStarted} />
 
             <button
               type="button"
@@ -269,7 +276,7 @@ export default function Navbar() {
 
           <div className="border-t pt-3">
             <Link
-              href="#"
+              href="/auth/login"
               className="block py-2 text-[#A6A6A6] hover:text-green-600"
             >
               Login
@@ -280,7 +287,13 @@ export default function Navbar() {
             >
               Download app
             </Link> */}
-            <Button color="primary" fullWidth variant="filled">
+            <Button
+              component="a"
+              href="/auth/signup"
+              color="primary"
+              fullWidth
+              variant="filled"
+            >
               Get Started
             </Button>
           </div>
