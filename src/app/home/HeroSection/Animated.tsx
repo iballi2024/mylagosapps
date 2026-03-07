@@ -114,7 +114,16 @@ const IoFastFoodOutline = ({ size, style }: IconProps) => (
   <span style={{ fontSize: size, ...style }}>🍔</span>
 );
 const TbTruckDelivery = ({ size, style }: IconProps) => (
-  <span style={{ fontSize: size, ...style }}>🚚</span>
+  //   <span style={{ fontSize: size,display: 'inline-block', transform: 'scaleX(-1)', ...style }}>🚚</span>
+  <span
+  className="inline-block transform scale-x-[-1]"
+    style={{
+      fontSize: size,
+      ...style,
+    }}
+  >
+    🚚
+  </span>
 );
 const TbRibbonHealth = ({ size, style }: IconProps) => (
   <span style={{ fontSize: size, ...style }}>🏥</span>
@@ -304,7 +313,7 @@ export default function HeroSection() {
 
           {/* ── RIGHT: image + floating cards column ── */}
           <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-            <div className="relative w-full h-full max-w-[380px] mx-auto">
+            <div className="relative w-full h-full max-w-95 mx-auto">
               {/* Top card */}
               <motion.div
                 variants={cardSlideRight(0.75)}
@@ -323,12 +332,12 @@ export default function HeroSection() {
                           : theme.colors.primary[6],
                     }}
                   >
-                    <Text fz={15} fw={600} className="flex items-end gap-2">
+                    <Text fz={15} fw={600} className="flex items-end gap-2 max-w-60">
                       <IoFastFoodOutline
                         size={30}
                         style={{ color: theme.colors.primary[6] }}
                       />
-                      From Our Kitchen to Your Doorstep
+                      Fresh Flavors from the Heart of the Mainland.
                     </Text>
                   </Card>
                 </motion.div>
@@ -343,7 +352,7 @@ export default function HeroSection() {
                   variants={cardSlideRight(0.95)}
                   initial="hidden"
                   animate={inView ? "show" : "hidden"}
-                  className="w-full"
+                  className="w-full flex flex-col items-start"
                 >
                   <motion.div {...floatLoop(8, 3.8, 0.5)}>
                     <Card
@@ -355,8 +364,8 @@ export default function HeroSection() {
                             : theme.colors.danger[6],
                       }}
                     >
-                      <Text fz={15} fw={600} className="flex items-end gap-2">
-                        Ride Smart . Move Easy
+                      <Text fz={15} fw={600} className="flex items-end max-w-60">
+                        From Pickup to Doorstep, We Deliver.
                         <TbTruckDelivery
                           size={30}
                           style={{ color: theme.colors.danger[6] }}
@@ -382,7 +391,7 @@ export default function HeroSection() {
                             : theme.colors.accentBlue[6],
                       }}
                     >
-                      <Text fz={15} fw={600} className="flex items-end gap-2">
+                      <Text fz={15} fw={600} className="flex items-end  max-w-70">
                         <TbRibbonHealth
                           size={30}
                           style={{ color: theme.colors.accentBlue[6] }}
