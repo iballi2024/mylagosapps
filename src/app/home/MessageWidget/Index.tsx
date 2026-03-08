@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Text, Textarea, TextInput, Button, Grid } from "@mantine/core";
+import { Box, Text, Textarea, TextInput, Button, Grid, Title } from '@mantine/core';
 import { useForm } from "@mantine/form";
 import { FaEnvelope } from "react-icons/fa6";
 
@@ -23,12 +23,11 @@ export default function MessageWidget() {
         bdrs={{ base: "lg", md: "xl" }}
         p={{ base: 20, md: 40 }}
         style={{
-          // backgroundColor: "#222938"
           backgroundColor: "rgba(500, 500, 500, 0.1)",
         }}
       >
         <FaEnvelope size={45} className="mx-auto mb-4" />
-        <Text fz={25}>Send Us a Message</Text>
+        <Title order={6} fz={35}>Send Us a Message</Title>
 
         <Box
           mt={40}

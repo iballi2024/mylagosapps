@@ -1,4 +1,5 @@
 type subOption = {
+  _id: string;
   title: string;
   tagline: string;
   description: string;
@@ -14,6 +15,7 @@ type subOption = {
 };
 export const subOptionsData: Record<string, subOption> = {
   bronze: {
+    _id: "bronze",
     title: "🥇Bronze",
     tagline: "Premium Lagos Lifestyle",
     description:
@@ -29,12 +31,13 @@ export const subOptionsData: Record<string, subOption> = {
     monthlyPrice: 2_999.99,
     imageUrl: "/images/home/silver.png",
     cta: {
-      title: "Try 1 month for free",
-      url: "https://www.lagosapps.com/subscription/silver",
+      title: "Subscribe",
+      url: "#",
       icon: "icon-arrow-right-long",
     }
   },
   silver: {
+    _id: "silver",
     title: "🥈Silver",
     tagline: "Smart Value Plan",
     description:
@@ -50,12 +53,13 @@ export const subOptionsData: Record<string, subOption> = {
     monthlyPrice: 9_999.99,
     imageUrl: "/images/home/bronze.png",
     cta: {
-      title: "Subscribe Now",
-      url: "https://www.lagosapps.com/subscription/bronze",
+      title: "Subscribe",
+      url: "#",
       icon: "icon-arrow-right-long",
     }
   },
   gold: {
+    _id: "gold",
     title: "🥇Gold",
     tagline: "Best Value",
     description:
@@ -71,8 +75,8 @@ export const subOptionsData: Record<string, subOption> = {
     monthlyPrice: 19_999.99,
     imageUrl: "/images/home/gold.png",
     cta: {
-      title: "Subscribe Now",
-      url: "https://www.lagosapps.com/subscription/gold",
+      title: "Subscribe",
+      url: "#",
       icon: "icon-arrow-right-long",
     }
   },

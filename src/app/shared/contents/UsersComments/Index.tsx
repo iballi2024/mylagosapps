@@ -1,5 +1,5 @@
 "use client";
-import { Box, Flex, Image, Space, Text } from "@mantine/core";
+import { Box, Flex, Image, Space, Text, Title } from "@mantine/core";
 import { UserComment, usersComments } from "./users-comments";
 import { FaCaretRight } from "react-icons/fa6";
 import { useEffect, useState } from "react";
@@ -44,7 +44,8 @@ export default function UsersComments() {
 
   return (
     <>
-      <Text
+      <Title
+        order={6}
         fw={600}
         fz={{ base: 35, md: 45 }}
         ta="left"
@@ -56,8 +57,9 @@ export default function UsersComments() {
         })}
       >
         People are Saying About LagosApps
-      </Text>
-      <Text className="max-w-[550px]">
+      </Title>
+
+      <Text className="max-w-137.5">
         Everything you need to accept to payment and grow your money of manage
         anywhere on planet
       </Text>
@@ -70,14 +72,12 @@ export default function UsersComments() {
           {currentComment.comment}
         </Text>
         <Text component="cite" mt={20} display={"block"}>
-          {/* Albert Einstein — Theoretical Physicist */}-{" "}
           {currentComment.userName}
         </Text>
       </Box>
 
       <Flex mt={50} gap={12}>
         <Box component="ul" display={"flex"} className="gap-3">
-          {/* .slice(1, 5) */}
           <div className="items-container flex gap-3 overflow-hidden rounded-full">
             <AnimatePresence>
               {items.slice(0, 4).map((comment: UserComment) => (
@@ -117,7 +117,6 @@ export default function UsersComments() {
             </AnimatePresence>
           </div>
         </Box>
-        {/* <Space h={20} /> */}
         <Flex component="div" justify={"end"}>
           <button
             type="button"

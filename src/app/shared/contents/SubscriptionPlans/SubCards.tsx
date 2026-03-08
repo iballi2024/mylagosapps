@@ -2,14 +2,25 @@ import { Box, Button, Card, MantineTheme, Text, Title } from "@mantine/core";
 import { subOptionsData } from "./data";
 import { SubscriptionType, SubscriptionTypes } from "./Index";
 import numeral from "numeral";
+import { useGlobal } from "../../../context/globalStore";
+import { useRouter } from "next/navigation";
 
 export default function SubCards({
-  colorScheme,
   selectedSubType,
 }: {
-  colorScheme: string;
   selectedSubType: SubscriptionType;
 }) {
+  /**Context API */
+  const { colorScheme } = useGlobal();
+  /** */
+
+  /**Constants */
+  const router = useRouter();
+
+  const handlePageRoute = (url: string) => {
+    // window.location.href = url;
+    router.push(`user-account/checkout/${url}`);
+  };
   return (
     <>
       {
@@ -88,9 +99,11 @@ export default function SubCards({
                       ))}
                     </Box>
                     <Button
-                      component="a"
-                      href={item.cta.url}
-                      target="_blank"
+                      // component="a"
+                      // href={item.cta.url}
+                      // target="_blank"
+                      // onClick={() => handlePageRoute(item.cta.url)}
+                      onClick={() => handlePageRoute(item._id)}
                       fullWidth
                       style={(theme: MantineTheme) => {
                         return {
@@ -102,12 +115,10 @@ export default function SubCards({
                           borderRadius: "100vmax",
                         };
                       }}
-                      //   color={colorScheme === "dark" ? "gray" : theme.colors.secondary[6]}
                       size="lg"
-                      //   style={() => ({
-                      //     borderRadius: "100vmax",
-                      //   })}
-                      className="capitalize text-sm! md:text-lg! font-semibold!"
+                      fw={600}
+                      fz={18}
+                      className="hover:no-underline!"
                     >
                       {item.cta.title}
                     </Button>
