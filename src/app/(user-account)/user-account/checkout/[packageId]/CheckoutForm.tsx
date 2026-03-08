@@ -1,8 +1,47 @@
+import { environment } from "@/src/app/environment/environment";
 import { Button, Card, Grid, Select, TextInput } from "@mantine/core";
+import { usePaystackPayment } from "react-paystack";
 
 export default function CheckoutForm() {
+  const publicKey = environment.paystack.publicKey || "";
+
+  const config = {
+    email: "customer@email.com",
+    amount: 200000,
+    publicKey,
+  };
+
+  const initializePayment = usePaystackPayment(config);
   return (
     <>
+      <button
+        onClick={() =>
+          initializePayment({
+            onSuccess: (
+              responses:
+                | {
+                    reference: string;
+                    trans: string;
+                    status: string;
+                    message: string;
+                    transaction: string;
+                    trxref: string;
+                    redirecturl: string;
+                  }
+                | Record<string, unknown>,
+            ) => {
+              console.log("Payment successful!", responses);
+            },
+            onClose: () => {
+              console.log("Payment closed");
+            },
+          })
+        }
+        className="px-4 py-2 bg-green-600 text-white rounded"
+      >
+        Pay ₦2,000
+      </button>
+
       <Card shadow="xs" padding="lg" radius="md">
         <form>
           <Grid gutter="md">
