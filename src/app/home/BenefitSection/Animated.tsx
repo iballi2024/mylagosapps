@@ -94,7 +94,7 @@ export default function Animated() {
         <Grid>
           {/* ── Left Column ── */}
           <Grid.Col span={{ sx: 12, md: 6 }}>
-            <motion.h2
+            <motion.h4
               className="ff-heading max-w-100 text-2xl md:text-3xl xl:text-5xl font-bold mb-16 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -102,7 +102,7 @@ export default function Animated() {
               custom={0}
             >
               What Benefit Will You Get
-            </motion.h2>
+            </motion.h4>
 
             <Box component="ul" my={20}>
               {list.map((feature, index) => (

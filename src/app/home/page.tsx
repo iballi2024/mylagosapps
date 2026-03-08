@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Grid, Text, Title, Card } from "@mantine/core";
+import { Box, Button, Grid, Text, Title, Card, Space } from "@mantine/core";
 import Toolbar from "../shared/components/Toolbar/Index";
 import { Image } from "@mantine/core";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
@@ -8,7 +8,7 @@ import AppCarousel from "./AppCarousel";
 import { FaArrowRightLong, FaRegCreditCard } from "react-icons/fa6";
 import { Product, products } from "./app-content-list";
 import ProductsSlider from "./ProductsSlider";
-import SubscriptionPlans from "./SubscriptionPlans/Index";
+import SubscriptionPlans from "../shared/contents/SubscriptionPlans/Index";
 import Footer from "../shared/Footer/Index";
 import { useGlobal } from "../context/globalStore";
 import UsersFeedbacks from "./UsersFeedbacks/Index";
@@ -16,6 +16,7 @@ import MessageWidget from "./MessageWidget/Index";
 import HeroSection from "./HeroSection/Index";
 import LagosAppsEcosystemSection from "./LagosAppsEcosystemSection/Index";
 import BenefitSection from "./BenefitSection/Index";
+import SectionTitle from '../shared/components/SectionTitle';
 
 export default function Home() {
   const { theme, colorScheme } = useGlobal();
@@ -44,20 +45,15 @@ export default function Home() {
       <Box pb={{ base: "100px", xl: "100px" }} style={{ background: gradient }}>
         <HeroSection />
 
-        <div className="my-20"></div>
-        <section>
-          <Title
+        <Space h={50} />
+        <Box component="section">
+          <SectionTitle
+            title="Apps That Power Daily Life in Lagos"
+            fontSize={40}
             order={2}
-            className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-6 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center"
-          >
-            Apps That Power Daily Life in Lagos
-          </Title>
-
-          {/* <AppsLogosCarousel />
-
-          <hr /> */}
+          />
           <AppCarousel />
-        </section>
+        </Box>
 
         <Box
           style={{
@@ -66,64 +62,26 @@ export default function Home() {
         >
           <LagosAppsEcosystemSection />
         </Box>
+        
 
-        {/* </div> */}
-
-        <div className="my-20"></div>
+        <Space h={50} />
 
         <Box component="section">
           <div className="main-wrapper">
-            <h2 className="ff-heading text-2xl md:text-3xl xl:text-5xl font-bold text-center mb-16 | after:content-[''] after:block after:w-75 after:mx-auto after:h-16 after:bg-[url('/assets/images/title-underline-waves.svg')] after:bg-no-repeat after:bg-center">
-              What You Can Do on LagosApp
-            </h2>
-
-            {/* <ProductsSlider colorScheme={colorScheme ?? "light"} /> */}
+            <SectionTitle title="What You Can Do on LagosApp" fontSize={40} order={3}/>
+            <Space h={50} />
             <ProductsSlider />
           </div>
         </Box>
 
         <div className="py-20"></div>
-        <SubscriptionPlans colorScheme={colorScheme ?? "light"} />
-        <div className="py-20"></div>
+        <SubscriptionPlans
+          title="Power Your Lifestyle with the Right Plan"
+          titleOrder={4}
+        />
+        <Space h={120} />
 
         <BenefitSection />
-
-        <div className="hidden grid grid-cols-12">
-          {products.map((prod: Product, index: number) => {
-            return (
-              <div
-                key={index}
-                // className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
-                className="col-span-full md:col-span-3  p-5 lg:p-12 flex flex-col justify-between"
-                style={{
-                  backgroundColor: `#${prod.color?.pri}`,
-                  color: prod?.color?.sec ? `#${prod?.color?.sec}` : "white",
-                }}
-              >
-                <div>
-                  <h3 className="ff-heading text-2xl md:text-3xl font-bold mb-4">
-                    {prod?.groupTitle}
-                  </h3>
-                  <ul className="list-disc marker:content-['.'] marker:block marker:text-7xl marker:leading-0 marker-top-3 ml-4 mb-6 md:text-xl">
-                    {prod.operations?.map((op, index: number) => (
-                      <li key={index} className="mb-3">
-                        {op}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <a
-                  href={prod.cta.url}
-                  target="_blank"
-                  aria-label="Visit app"
-                  className="flex ml-auto text-right gap-4 mt-6"
-                >
-                  <FaArrowRightLong size={25} />
-                </a>
-              </div>
-            );
-          })}
-        </div>
       </Box>
 
       <Box

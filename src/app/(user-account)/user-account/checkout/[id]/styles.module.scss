@@ -1,0 +1,12 @@
+.data-list {
+  dl {
+    dt {
+      font-size: large;
+      font-weight: bold;
+      font-family: var(--mantine-font-family-headings);
+    }
+    dd{
+      margin-bottom: 1.4rem;
+    }
+  }
+}
