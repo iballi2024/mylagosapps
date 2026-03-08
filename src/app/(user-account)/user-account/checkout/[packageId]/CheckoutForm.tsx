@@ -1,20 +1,49 @@
+"use client";
+import dynamic from "next/dynamic";
 import { environment } from "@/src/app/environment/environment";
 import { Button, Card, Grid, Select, TextInput } from "@mantine/core";
-import { usePaystackPayment } from "react-paystack";
+// import { usePaystackPayment } from "react-paystack";
+// import { PaystackButton } from "react-paystack";
+
+const PaystackButton = dynamic(
+  () => import("react-paystack").then((mod) => mod.PaystackButton),
+  { ssr: false },
+);
 
 export default function CheckoutForm() {
   const publicKey = environment.paystack.publicKey || "";
 
   const config = {
+    // email: "customer@email.com",
+    // amount: 200000,
+    // publicKey,
+
+    reference: new Date().getTime().toString(),
     email: "customer@email.com",
-    amount: 200000,
-    publicKey,
+    amount: 500000, // amount in kobo (₦5000)
+    publicKey: publicKey!,
   };
 
-  const initializePayment = usePaystackPayment(config);
+  const handleSuccess = (reference: any) => {
+    console.log("Payment successful", reference);
+  };
+
+  const handleClose = () => {
+    console.log("Payment closed");
+  };
+
+  const componentProps = {
+    ...config,
+    text: "Pay Now",
+    onSuccess: handleSuccess,
+    onClose: handleClose,
+  };
+
+  // const initializePayment = usePaystackPayment(config);
   return (
     <>
-      <button
+      <PaystackButton {...componentProps} />
+      {/* <button
         onClick={() =>
           initializePayment({
             onSuccess: (
@@ -40,7 +69,7 @@ export default function CheckoutForm() {
         className="px-4 py-2 bg-green-600 text-white rounded"
       >
         Pay ₦2,000
-      </button>
+      </button> */}
 
       <Card shadow="xs" padding="lg" radius="md">
         <form>
