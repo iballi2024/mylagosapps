@@ -11,9 +11,15 @@ type subOption = {
     title: string;
     url: string;
     icon: string;
-  }
+  };
+  // fullDetails?: {
+  //   [key: string]: string | number | boolean;
+  // };
+  // fullDetails?: Record<string, string | number | boolean>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fullDetails?: any;
 };
-export const subOptionsData: Record<string, subOption> = {
+export const packageOptionsData: Record<string, subOption> = {
   bronze: {
     _id: "bronze",
     title: "🥇Bronze",
@@ -34,6 +40,37 @@ export const subOptionsData: Record<string, subOption> = {
       title: "Subscribe",
       url: "#",
       icon: "icon-arrow-right-long",
+    },
+    fullDetails: {
+      targetUser: "Students, individuals, and light users who want small savings across multiple services",
+      benefits: {
+        "van hire": [
+          "Access to VanLagos' shared ride options",
+          "5% discount on every ride/delivery",
+          "Priority booking during off-peak hours",
+        ],
+        "meals ordering": [
+          "5% discount on all meal orders",
+          "Exclusive access to budget-friendly meal options",
+          "Early access to new menu items",
+          "Free delivery once per month"
+        ],
+        "telemedicine": [
+          "2 free telemedicine chats per month",
+          "Access to general practitioners and specialists",
+          "Priority booking for telemedicine sessions",
+        ],
+        "events": [
+          "Early access to event space bookings",
+          "Exclusive discounts on select events",
+          "Priority booking for popular events and studios",
+        ],
+        "groceries": [
+          "3% discount on grocery orders",
+          "Access to exclusive grocery deals",
+          "Priority delivery slots during peak times",
+        ],
+      }
     }
   },
   silver: {

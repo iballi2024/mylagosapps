@@ -1,22 +1,49 @@
 "use client";
 import { Grid, Space, Title, Box, MantineTheme } from "@mantine/core";
 import styles from "./styles.module.scss";
-import Vanlagos from "../../../../(platforms)/vanlagos/page";
 import { useGlobal } from "@/src/app/context/globalStore";
+import { packageOptionsData } from "@/src/app/shared/contents/SubscriptionPlans/data";
+import { useEffect } from "react";
+import { useParams } from "next/navigation";
+import CheckoutForm from "./CheckoutForm";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export default function Checkout() {
+  /**Context API */
   const { colorScheme } = useGlobal();
+
+  /**React Hooks */
+  const params = useParams();
+  const { packageId } = params as { packageId: string };
+  console.log({ packageId });
+
+  useEffect(() => {
+    console.log({ packageOptionsData });
+    const data = packageOptionsData["bronze"];
+    console.log({ data });
+  }, []);
   return (
     <>
       <div className="pt-20">
         <section>
           <div className="main-wrapper mt-8">
+            <div className="mb-4 font-bold">
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className="cursor-pointer  text-lg flex items-center text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              >
+                <FaArrowLeft style={{ display: "inline", marginRight: 5 }} />
+                Back
+              </button>
+            </div>
             <Grid gutter={30}>
               <Grid.Col
                 span={{
                   base: 12,
                   md: 6,
                 }}
+                order={{ base: 2, md: 1 }}
               >
                 <article>
                   <Title order={2} fz={20}>
@@ -56,14 +83,6 @@ export default function Checkout() {
                           <li>5% discount on every ride</li>
                           <li>Priority booking during off-peak hours</li>{" "}
                         </ul>
-
-                        {/* <ul>
-                        <li>5% off rides on VanLagos</li>
-                        <li>2 free telemedicine chats/month</li>
-                        <li>5% off meals on Mainlandmeals</li>
-                        <li>Early access to event spaces</li>
-                        <li>3% grocery discount</li>
-                      </ul> */}
                       </dd>
                       <dt>Mainlandclinics</dt>
                       <dd>
@@ -81,30 +100,6 @@ export default function Checkout() {
                       </dd>
                     </dl>
                   </Box>
-
-                  <p>hello</p>
-
-                  {/* <dl>
-                  <dt>Who It&lsquo;s For</dt>
-                  <dd>
-                    Students, individuals, and light users who want small
-                    savings across multiple services
-                  </dd>
-
-                  <dt>What You Get</dt>
-                  <dd>
-                    <dl>
-                      <dt>Vanlagos</dt>
-                      <dl>
-                        <ul>
-                          <li>Free ride</li>
-                          <li>Free telemedicine</li>
-                          <li>Free meals</li>
-                        </ul>
-                      </dl>
-                    </dl>
-                  </dd>
-                </dl> */}
                 </article>
               </Grid.Col>
               <Grid.Col
@@ -112,8 +107,12 @@ export default function Checkout() {
                   base: 12,
                   md: 6,
                 }}
+                order={{ base: 1, md: 2 }}
               >
                 <Title order={1}>Checkout</Title>
+
+                <Space h={20} />
+                <CheckoutForm />
               </Grid.Col>
             </Grid>
             {/* <Space h={100} />

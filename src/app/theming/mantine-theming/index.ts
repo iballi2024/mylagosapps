@@ -4,6 +4,7 @@ import {
   createTheme,
   defaultVariantColorsResolver,
   MantineTheme,
+  Select,
   TextInput,
 } from "@mantine/core";
 
@@ -212,6 +213,26 @@ export const theme = createTheme({
         },
       },
     },
+
+    Select: {
+      styles: {
+        label: {
+          fontFamily: "inherit",
+          fontWeight: 500,
+          fontSize: "inherit",
+          zIndex: 0,
+          color: "inherit",
+          textAlign: "left",
+          marginBottom: "0.5rem",
+        },
+        input: {
+          borderRadius: 5,
+          height: 45,
+          fontSize: "inherit",
+        },
+      },
+    },
+
   },
 });
 

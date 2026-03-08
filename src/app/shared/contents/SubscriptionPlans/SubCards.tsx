@@ -1,5 +1,5 @@
 import { Box, Button, Card, MantineTheme, Text, Title } from "@mantine/core";
-import { subOptionsData } from "./data";
+import { packageOptionsData } from "./data";
 import { SubscriptionType, SubscriptionTypes } from "./Index";
 import numeral from "numeral";
 import { useGlobal } from "../../../context/globalStore";
@@ -28,8 +28,9 @@ export default function SubCards({
           component="ul"
           className="max-w-6xl mx-auto grid grid-cols-3 gap-4 items-stretch w-full"
         >
-          {Object.keys(subOptionsData).map((_item, index) => {
-            const item = subOptionsData[_item as keyof typeof subOptionsData];
+          {Object.keys(packageOptionsData).map((_item, index) => {
+            const item =
+              packageOptionsData[_item as keyof typeof packageOptionsData];
             return (
               <Box
                 component="li"
