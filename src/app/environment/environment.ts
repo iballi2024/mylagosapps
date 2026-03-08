@@ -4,4 +4,6 @@ export const environment = {
   isDevelopment: process.env.NEXT_NODE_ENV === "development",
   isStaging: process.env.NEXT_NODE_ENV === "staging",
   storageSecretKey: process.env.NEXT_STORAGE_SECRET_KEY,
+  paystackPublicKey: process.env.NEXT_PAYSTACK_PUBLIC_KEY,
+  paystackSecretKey: process.env.NEXT_PAYSTACK_SECRET_KEY,
 };
