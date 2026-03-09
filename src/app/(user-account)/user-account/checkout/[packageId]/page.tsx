@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import CheckoutForm from "./CheckoutForm";
 import { FaArrowLeft } from "react-icons/fa6";
+import Paystack from "./Paystack";
+import PaystackButton from "./PaystackButton";
 
 export default function Checkout() {
   /**Context API */
@@ -112,7 +114,10 @@ export default function Checkout() {
                 <Title order={1}>Checkout</Title>
 
                 <Space h={20} />
+                {/* <Paystack /> */}
                 <CheckoutForm />
+                <Space h={20} />
+                {/* <PaystackButton email={"customer@email.com"} amount={20000} /> */}
               </Grid.Col>
             </Grid>
             {/* <Space h={100} />

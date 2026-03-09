@@ -16,6 +16,7 @@ import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import { GlobalStoreProvider } from "./context/globalStore/global.store";
 import PageLoader from "./shared/components/PageLoader/Index";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -67,6 +68,11 @@ export default function RootLayout({
             </Box>
           </GlobalStoreProvider>
         </MantineProvider>
+
+        <Script
+          src="https://js.paystack.co/v1/inline.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

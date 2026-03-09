@@ -2,8 +2,6 @@
 import dynamic from "next/dynamic";
 import { environment } from "@/src/app/environment/environment";
 import { Button, Card, Grid, Select, TextInput } from "@mantine/core";
-// import { usePaystackPayment } from "react-paystack";
-// import { PaystackButton } from "react-paystack";
 
 const PaystackButton = dynamic(
   () => import("react-paystack").then((mod) => mod.PaystackButton),
@@ -14,10 +12,6 @@ export default function CheckoutForm() {
   const publicKey = environment.paystack.publicKey || "";
 
   const config = {
-    // email: "customer@email.com",
-    // amount: 200000,
-    // publicKey,
-
     reference: new Date().getTime().toString(),
     email: "customer@email.com",
     amount: 500000, // amount in kobo (₦5000)
@@ -39,10 +33,8 @@ export default function CheckoutForm() {
     onClose: handleClose,
   };
 
-  // const initializePayment = usePaystackPayment(config);
   return (
     <>
-      <PaystackButton {...componentProps} />
       {/* <button
         onClick={() =>
           initializePayment({
@@ -74,7 +66,7 @@ export default function CheckoutForm() {
       <Card shadow="xs" padding="lg" radius="md">
         <form>
           <Grid gutter="md">
-            <Grid.Col span={{ base: 12, md: 6 }}>
+            {/* <Grid.Col span={{ base: 12, md: 6 }}>
               <TextInput
                 label="Card Number"
                 placeholder="Enter your card number"
@@ -97,7 +89,7 @@ export default function CheckoutForm() {
                 placeholder="Enter cardholder name"
                 required
               />
-            </Grid.Col>
+            </Grid.Col> */}
             <Grid.Col span={12}>
               <TextInput
                 label="Billing Address"
@@ -131,6 +123,7 @@ export default function CheckoutForm() {
             </Grid.Col>
           </Grid>
         </form>
+        <PaystackButton {...componentProps} />
       </Card>
     </>
   );
