@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { useGlobal } from "../context/globalStore";
+import { useGlobal } from "../context/global-store";
 
 export default function ProductsSlider() {
   const { theme, colorScheme } = useGlobal();

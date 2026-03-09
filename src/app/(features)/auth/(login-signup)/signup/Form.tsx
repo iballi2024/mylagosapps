@@ -19,8 +19,8 @@ type FormValues = {
 export default function Form({
   setIsActivationRequestSent,
 }: {
-//   setIsActivationRequestSent: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsActivationRequestSent: (payload: boolean)=> void;
+  setIsActivationRequestSent: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsActivationRequestSent: (payload: boolean) => void;
 }) {
   const form = useForm({
     mode: "uncontrolled",
@@ -68,11 +68,8 @@ export default function Form({
   };
   return (
     <>
-      <button onClick={() => setIsActivationRequestSent(true)}>
-        Click me!
-      </button>
       <form
-        className="mb-20"
+        // className="mb-20 bg-red-300!"
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
         <Grid gutter={22}>
@@ -133,10 +130,9 @@ export default function Form({
               <Link href="#" className="underline!">
                 Terms of use
               </Link>{" "}
-              and <Link href="#">Privacy Policy</Link>
+              and <Link href="#" className="underline!">Privacy Policy</Link>
             </Text>
 
-            {form.submitting ? "loading..." : <>Not Loading</>}
             <PrimaryBtn
               type="submit"
               title="Create account"

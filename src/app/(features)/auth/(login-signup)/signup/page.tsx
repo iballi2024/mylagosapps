@@ -7,7 +7,7 @@ import Form from "./Form";
 export default function SignUp() {
   const [isActivationRequestSent, setIsActivationRequestSent] = useState(false);
 
-  console.log({isActivationRequestSent});
+  console.log({ isActivationRequestSent });
 
   return (
     <>
@@ -15,9 +15,11 @@ export default function SignUp() {
       <AuthCard
         title="Create an account"
         tagline={
-          <>
-            Already have an account? <Link href="/auth/login">Log in</Link>
-          </>
+          !isActivationRequestSent && (
+            <>
+              Already have an account? <Link href="/auth/login">Log in</Link>
+            </>
+          )
         }
       >
         <div className="mt-6"></div>

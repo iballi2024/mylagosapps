@@ -1,8 +1,7 @@
-
 export default function UserAccount() {
   return (
     <>
-      UserAccount
+      <div className="pt-20">UserAccount</div>
     </>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { Grid, Space, Title, Box, MantineTheme } from "@mantine/core";
 import styles from "./styles.module.scss";
-import { useGlobal } from "@/src/app/context/globalStore";
+import { useGlobal } from "@/src/app/context/global-store";
 import { packageOptionsData } from "@/src/app/shared/contents/SubscriptionPlans/data";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";

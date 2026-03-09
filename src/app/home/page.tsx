@@ -10,7 +10,7 @@ import { Product, products } from "./app-content-list";
 import ProductsSlider from "./ProductsSlider";
 import SubscriptionPlans from "../shared/contents/SubscriptionPlans/Index";
 import Footer from "../shared/Footer/Index";
-import { useGlobal } from "../context/globalStore";
+import { useGlobal } from "../context/global-store";
 import UsersFeedbacks from "./UsersFeedbacks/Index";
 import MessageWidget from "./MessageWidget/Index";
 import HeroSection from "./HeroSection/Index";

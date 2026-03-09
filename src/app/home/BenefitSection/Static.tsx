@@ -5,7 +5,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { TbRibbonHealth, TbTruckDelivery } from "react-icons/tb";
 import { GiSolarPower } from "react-icons/gi";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
-import { useGlobal } from "../../context/globalStore";
+import { useGlobal } from "../../context/global-store";
 
 const list = [
   "Faster access to essential services",

@@ -1,11 +1,18 @@
 "use client";
-import { Box, Grid, Text, Card, PolymorphicComponentProps, BoxComponentProps } from "@mantine/core";
+import {
+  Box,
+  Grid,
+  Text,
+  Card,
+  PolymorphicComponentProps,
+  BoxComponentProps,
+} from "@mantine/core";
 import { Image } from "@mantine/core";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { TbRibbonHealth, TbTruckDelivery } from "react-icons/tb";
 import { GiSolarPower } from "react-icons/gi";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
-import { useGlobal } from "../../context/globalStore";
+import { useGlobal } from "../../context/global-store";
 import { motion, Variants, useInView } from "framer-motion";
 import { ReactNode, useRef } from "react";
 
@@ -76,7 +83,11 @@ const list = [
 
 // ─── Motion wrappers ──────────────────────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type BoxType = (<C = 'div'>(props: PolymorphicComponentProps<C,BoxComponentProps>) => ReactNode) | any;
+type BoxType =
+  | (<C = "div">(
+      props: PolymorphicComponentProps<C, BoxComponentProps>,
+    ) => ReactNode)
+  | any;
 const MotionBox = motion(Box as BoxType);
 const MotionCard = motion(Card as BoxType);
 

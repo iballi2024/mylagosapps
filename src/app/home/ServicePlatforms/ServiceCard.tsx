@@ -1,6 +1,6 @@
 import { Box, Card, Text, Title } from "@mantine/core";
 import { FaSolarPanel, FaVanShuttle } from "react-icons/fa6";
-import { useGlobal } from "../../context/globalStore";
+import { useGlobal } from "../../context/global-store";
 import IconProp from "./IconProp";
 
 export default function ServiceCard({
@@ -13,14 +13,15 @@ export default function ServiceCard({
   const { theme, colorScheme } = useGlobal();
   return (
     <>
-      <Card bdrs={20} shadow="xs" padding={"xl"} ta={"center"}
-          h={'100%'}>
-
+      <Card bdrs={20} shadow="xs" padding={"xl"} ta={"center"} h={"100%"}>
         <Box
           component="div"
           mb={10}
           style={{
-            color: colorScheme === "dark" ? theme?.colors.gray[6] : theme?.colors.gray[8],
+            color:
+              colorScheme === "dark"
+                ? theme?.colors.gray[6]
+                : theme?.colors.gray[8],
           }}
         >
           <IconProp icon={icon} />
@@ -46,9 +47,7 @@ export default function ServiceCard({
           className="no-underline! flex items-center justify-center text-primary-light! font-semibold transform transition-transform  duration-300 
                hover:translate-x-2 hover:scale-105"
         >
-          {
-            cta.title
-          }
+          {cta.title}
           <svg
             className="-mr-1 ml-2 h-4 w-4"
             fill="currentColor"

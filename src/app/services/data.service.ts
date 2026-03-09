@@ -12,6 +12,27 @@ import {
 } from "../common";
 import axiosInstance from "../interceptors/axiosInstance";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const constructApiUrl = (baseUrl: string, params: any = {}) => {
+  const searchParams = new URLSearchParams();
+
+  // Loop through the params object and add each parameter to the URL
+  for (const key in params) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (params?.hasOwnProperty(key) && params[key] !== undefined) {
+      searchParams.append(key, params[key]);
+    }
+  }
+
+  // Use the URLSearchParams toString method to get the query string
+  const queryString = searchParams.toString();
+
+  // Construct the full URL
+  const apiUrl = `${baseUrl}${queryString ? `?${queryString}` : ""}`;
+
+  return apiUrl;
+};
+
 export class DataService {
   private url: string;
   constructor(url: string) {
@@ -26,6 +47,19 @@ export class DataService {
       );
       return response.data;
     } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+
+  async getData(query?: Record<string, unknown>, urlParam?: string) {
+    try {
+      const response = await axiosInstance.get(
+        constructApiUrl(`${this.url}${urlParam || ""}`, query),
+      );
+      return response.data;
+    } catch (error) {
+      log({ "DataService.getData error": error });
       this.handleError(error);
     }
   }

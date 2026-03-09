@@ -1,4 +1,4 @@
-import { useGlobal } from "@/src/app/context/globalStore";
+import { useGlobal } from "@/src/app/context/global-store";
 import { Button, ButtonProps, Loader } from "@mantine/core";
 
 interface PrimaryBtnProps extends ButtonProps {
@@ -22,7 +22,7 @@ export default function PrimaryBtn({
   disabled = false,
   ...props
 }: PrimaryBtnProps) {
-  const {theme, colorScheme} = useGlobal();
+  const { theme, colorScheme } = useGlobal();
   return (
     <>
       <Button
@@ -32,11 +32,14 @@ export default function PrimaryBtn({
         size={size}
         onClick={handleEvent}
         fullWidth={fullWidth}
-        disabled={disabled }
+        disabled={disabled}
         {...props}
       >
         {loading ? (
-          <Loader size={20} color={colorScheme === "dark" ? "#fff" : theme?.colors.primary[3]} />
+          <Loader
+            size={20}
+            color={colorScheme === "dark" ? "#fff" : theme?.colors.primary[3]}
+          />
         ) : (
           title
         )}

@@ -4,7 +4,7 @@ import { UserComment, usersComments } from "./users-comments";
 import { FaCaretRight } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useGlobal } from "@/src/app/context/globalStore";
+import { useGlobal } from "@/src/app/context/global-store";
 
 export default function UsersComments() {
   const { theme } = useGlobal();

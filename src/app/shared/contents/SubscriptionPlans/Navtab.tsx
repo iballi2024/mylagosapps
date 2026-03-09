@@ -1,7 +1,7 @@
 import React from "react";
 import { SubscriptionType, SubscriptionTypes } from "./Index";
 import { Box, Button, MantineTheme, Text } from "@mantine/core";
-import { useGlobal } from "../../../context/globalStore";
+import { useGlobal } from "../../../context/global-store";
 
 export default function Navtab({
   selectedSubType,
@@ -10,7 +10,7 @@ export default function Navtab({
   selectedSubType: SubscriptionType;
   setSelectedSubType: React.Dispatch<React.SetStateAction<SubscriptionType>>;
 }) {
-  const {colorScheme} = useGlobal();
+  const { colorScheme } = useGlobal();
   return (
     <>
       <Box component="div" className="grid place-items-center">

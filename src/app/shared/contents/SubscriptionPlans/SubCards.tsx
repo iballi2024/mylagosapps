@@ -2,7 +2,7 @@ import { Box, Button, Card, MantineTheme, Text, Title } from "@mantine/core";
 import { packageOptionsData } from "./data";
 import { SubscriptionType, SubscriptionTypes } from "./Index";
 import numeral from "numeral";
-import { useGlobal } from "../../../context/globalStore";
+import { useGlobal } from "../../../context/global-store";
 import { useRouter } from "next/navigation";
 
 export default function SubCards({

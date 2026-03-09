@@ -4,7 +4,7 @@ import { Image } from "@mantine/core";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { TbRibbonHealth, TbTruckDelivery } from "react-icons/tb";
 import { GiSolarPower } from "react-icons/gi";
-import { useGlobal } from "../../context/globalStore";
+import { useGlobal } from "../../context/global-store";
 import PrimaryBtn from "../../shared/components/buttons/PrimaryBtn";
 import { FaRegCreditCard } from "react-icons/fa6";
 

@@ -14,7 +14,7 @@ import { theme } from "./theming/mantine-theming";
 import "@mantine/core/styles.css";
 // ‼️ import carousel styles after core package styles
 import "@mantine/carousel/styles.css";
-import { GlobalStoreProvider } from "./context/globalStore/global.store";
+import { GlobalStoreProvider } from "./context/global-store/global.store";
 import PageLoader from "./shared/components/PageLoader/Index";
 import Script from "next/script";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -57,8 +57,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  
   return (
     <html lang="en">
       <body

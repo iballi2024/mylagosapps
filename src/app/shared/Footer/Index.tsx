@@ -1,5 +1,5 @@
 import { Box, Grid, Image, Text, Button, TextInput } from "@mantine/core";
-import { useGlobal } from "../../context/globalStore";
+import { useGlobal } from "../../context/global-store";
 import MessageWidget from "../../home/MessageWidget/Index";
 import UsersFeedbacks from "../../home/UsersFeedbacks/Index";
 import { FaArrowCircleRight } from "react-icons/fa";
@@ -150,11 +150,7 @@ export default function Footer() {
                             key={index}
                             className="text-sm  leading-8 text-dark-3"
                           >
-                            <Link
-                              href={link.href}
-                            >
-                              {link.title}
-                            </Link>
+                            <Link href={link.href}>{link.title}</Link>
                           </Box>
                         ))}
                       </Box>
