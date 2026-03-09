@@ -72,7 +72,7 @@ export default function EcosystemSection() {
       <section className="py-16 lg:py-24" ref={sectionRef}>
         <div className="main-wrapper grid grid-cols-12 gap-y-12 md:gap-6">
           {/* Left column */}
-          <div className="col-span-12 md:col-span-7">
+          <div className="col-span-12 lg:col-span-7">
             <h2
               className="animate-on-scroll slide-left ff-heading text-2xl md:text-6xl font-semibold mb-5"
               style={{ transitionDelay: "0ms" }}
@@ -106,7 +106,7 @@ export default function EcosystemSection() {
           </div>
 
           {/* Right column */}
-          <div className="col-span-12 md:col-span-5 order-1 md:order-2">
+          <div className="col-span-12 lg:col-span-5 order-1 md:order-2">
             <ul className="flex flex-col gap-y-6">
               {features.map((f, i) => (
                 <li

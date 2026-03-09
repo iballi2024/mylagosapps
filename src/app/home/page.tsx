@@ -5,7 +5,7 @@ import { Image } from "@mantine/core";
 import PrimaryBtn from "../shared/components/buttons/PrimaryBtn";
 import AppsLogosCarousel from "./AppsLogosCarousel";
 import AppCarousel from "./AppCarousel";
-import { FaArrowRightLong, FaRegCreditCard } from "react-icons/fa6";
+import { FaRegCreditCard, FaSolarPanel } from "react-icons/fa6";
 import { Product, products } from "./app-content-list";
 import ProductsSlider from "./ProductsSlider";
 import SubscriptionPlans from "../shared/contents/SubscriptionPlans/Index";
@@ -17,6 +17,8 @@ import HeroSection from "./HeroSection/Index";
 import LagosAppsEcosystemSection from "./LagosAppsEcosystemSection/Index";
 import BenefitSection from "./BenefitSection/Index";
 import SectionTitle from "../shared/components/SectionTitle";
+import Link from "next/link";
+import ServicePlatforms from "./ServicePlatforms/Index";
 
 export default function Home() {
   const { theme, colorScheme } = useGlobal();
@@ -79,14 +81,23 @@ export default function Home() {
         <Box component="section">
           <div className="main-wrapper">
             <SectionTitle
-              title="What You Can Do on LagosApp"
+              // title="What You Can Do on LagosApp"
+              title="Everything You Need, All in One Place"
               order={3}
               fontSize={{ base: 35, lg: 45 }}
               textAlign={"center"}
               lh={1.1}
             />
+            <Text fz={18} maw={750} ta={"center"} mx={"auto"}>
+              From clean energy and transportation to healthcare, food, and
+              personal growth, LagosApps connects you to everyday services that
+              make life in Lagos simpler, smarter, and more convenient.
+            </Text>
             <Space h={50} />
-            <ProductsSlider />
+            {/* <ProductsSlider />
+            <Space h={50} /> */}
+
+            <ServicePlatforms />
           </div>
         </Box>
 

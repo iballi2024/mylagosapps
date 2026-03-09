@@ -26,7 +26,7 @@ export default function SubCards({
       {
         <Box
           component="ul"
-          className="max-w-6xl mx-auto grid grid-cols-3 gap-4 items-stretch w-full"
+          className="max-w-6xl mx-auto px-4 grid grid-cols-3 gap-4 items-stretch w-full"
         >
           {Object.keys(packageOptionsData).map((_item, index) => {
             const item =
