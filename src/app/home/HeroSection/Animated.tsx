@@ -7,6 +7,7 @@ import {
   Variants,
   TargetAndTransition,
 } from "framer-motion";
+import { Image } from "@mantine/core";
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
@@ -247,7 +248,7 @@ export default function HeroSection() {
 
   return (
     <section className="hero" ref={ref}>
-      <div className="flex flex-col max-w-7xl mx-auto px-4">
+        <div className="flex flex-col main-wrapper">
         <div className="min-h-screen grid grid-cols-12 gap-y-8 md:gap-x-4 items-center mt-10">
           {/* ── LEFT: text column ── */}
           <motion.div
@@ -430,7 +431,7 @@ export default function HeroSection() {
                 initial="hidden"
                 animate={inView ? "show" : "hidden"}
               >
-                <img
+                <Image
                   src="/assets/images/joyful-black-male-female-best-friends-have-fun-together-take-picture-themselves-pose-making-selfie-being-good-mood-after-successful-day.png"
                   alt="Two friends smiling"
                   className="w-full h-full object-cover"

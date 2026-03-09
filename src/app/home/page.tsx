@@ -16,7 +16,7 @@ import MessageWidget from "./MessageWidget/Index";
 import HeroSection from "./HeroSection/Index";
 import LagosAppsEcosystemSection from "./LagosAppsEcosystemSection/Index";
 import BenefitSection from "./BenefitSection/Index";
-import SectionTitle from '../shared/components/SectionTitle';
+import SectionTitle from "../shared/components/SectionTitle";
 
 export default function Home() {
   const { theme, colorScheme } = useGlobal();
@@ -49,9 +49,20 @@ export default function Home() {
         <Box component="section">
           <SectionTitle
             title="Apps That Power Daily Life in Lagos"
-            fontSize={40}
+            fontSize={{ base: 35, lg: 45 }}
             order={2}
+            textAlign={"center"}
+            lh={1.1}
+            // style={() => {
+            //   return {
+            //     backgroundColor:
+            //       colorScheme === "dark" ? `rgba(255, 255, 255, 0.1)` : `red`,
+            //   };
+            // }}
           />
+          {/* <Title order={2} fz={{ base: 35, xs: 45 }} lh={1.1} ta={'center'} className="font-bold md:mt-30">
+            Apps That Power Daily Life in Lagos
+          </Title> */}
           <AppCarousel />
         </Box>
 
@@ -62,13 +73,18 @@ export default function Home() {
         >
           <LagosAppsEcosystemSection />
         </Box>
-        
 
         <Space h={50} />
 
         <Box component="section">
           <div className="main-wrapper">
-            <SectionTitle title="What You Can Do on LagosApp" fontSize={40} order={3}/>
+            <SectionTitle
+              title="What You Can Do on LagosApp"
+              order={3}
+              fontSize={{ base: 35, lg: 45 }}
+              textAlign={"center"}
+              lh={1.1}
+            />
             <Space h={50} />
             <ProductsSlider />
           </div>
