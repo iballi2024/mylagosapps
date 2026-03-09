@@ -17,6 +17,8 @@ import "@mantine/carousel/styles.css";
 import { GlobalStoreProvider } from "./context/globalStore/global.store";
 import PageLoader from "./shared/components/PageLoader/Index";
 import Script from "next/script";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import { log } from "console";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -55,11 +57,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
     <html lang="en">
       <body
         className={`${montserrat.variable} ${geistPoppins.variable} ${geistInter.variable} ${geistMono.variable} antialiased`}
       >
+        <ToastContainer draggable transition={Bounce} />
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <GlobalStoreProvider>
             <Box pos="relative">
@@ -69,10 +74,10 @@ export default function RootLayout({
           </GlobalStoreProvider>
         </MantineProvider>
 
-        <Script
+        {/* <Script
           src="https://js.paystack.co/v1/inline.js"
           strategy="afterInteractive"
-        />
+        /> */}
       </body>
     </html>
   );

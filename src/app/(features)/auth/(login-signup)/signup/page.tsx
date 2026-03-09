@@ -1,12 +1,17 @@
 "use client";
 import Link from "next/link";
 import AuthCard from "../components/AuthCard";
-import { Grid, Space, Text, TextInput } from "@mantine/core";
-import PrimaryBtn from "@/src/app/shared/components/buttons/PrimaryBtn";
-
+import { Box, Space, Text } from "@mantine/core";
+import { useState } from "react";
+import Form from "./Form";
 export default function SignUp() {
+  const [isActivationRequestSent, setIsActivationRequestSent] = useState(false);
+
+  console.log({isActivationRequestSent});
+
   return (
     <>
+      <Space h={50} />
       <AuthCard
         title="Create an account"
         tagline={
@@ -16,46 +21,23 @@ export default function SignUp() {
         }
       >
         <div className="mt-6"></div>
-        <form>
-          <Grid>
-            <Grid.Col span={12}>
-              <TextInput label="Username" />
-            </Grid.Col>
-            <Grid.Col span={12}>
-              <TextInput type="email" label="Email address" />
-            </Grid.Col>
-            <Grid.Col span={12}>
-              <TextInput
-                type="password"
-                label="Password"
-                // description="Your password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number."
-              />
-              {/* <Text component="small" fz={14}>
-                Your password must be at least 8 characters long, contain at
-                least one uppercase letter, one lowercase letter, and one
-                number.
-              </Text>
-             */}
-              <Space h={30} />
-              <Text fz={14}>
-                By creating an account, you agree to our{" "}
-                <Link href="#" className="underline!">
-                  Terms of use
-                </Link>{" "}
-                and <Link href="#">Privacy Policy</Link>
-              </Text>
-            </Grid.Col>
-            <Grid.Col span={12}>
-              <PrimaryBtn
-                title="Create account"
-                size="lg"
-                fullWidth={true}
-                className="mt-6"
-              />
-            </Grid.Col>
-          </Grid>
-        </form>
+
+        {isActivationRequestSent ? (
+          <Box>
+            <Text fz={14} c={"#6B7280"} mb={20}>
+              Your account has been created. Please check your email and click
+              the activation link to verify and activate your account.
+            </Text>
+
+            <Text fz={14} c={"#6B7280"}>
+              If you don’t see the email, check your spam or junk folder.
+            </Text>
+          </Box>
+        ) : (
+          <Form setIsActivationRequestSent={setIsActivationRequestSent} />
+        )}
       </AuthCard>
+      <Space h={50} />
     </>
   );
 }
