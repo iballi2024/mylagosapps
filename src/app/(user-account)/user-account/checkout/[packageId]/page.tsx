@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import CheckoutForm from "./CheckoutForm";
 import { FaArrowLeft } from "react-icons/fa6";
-import Paystack from "./Paystack";
-import PaystackButton from "./PaystackButton";
+// import Paystack from "./Paystack";
+// import PaystackButton from "./PaystackButton";
 
 export default function Checkout() {
   /**Context API */

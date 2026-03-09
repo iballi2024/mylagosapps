@@ -235,45 +235,6 @@ export const theme = createTheme({
         };
       },
     },
-    TextInput: {
-      styles: (
-        theme: MantineTheme,
-        props: { variant?: string; color?: string },
-      ) => {
-        if (props.variant === "transparent") {
-          return {
-            input: {
-              borderColor: theme.colors.primary[6],
-              backgroundColor: props.variant,
-              color: props.color,
-            },
-            "&:hover": {
-              input: {
-                borderColor: theme.colors.red[6],
-                backgroundColor: theme.colors.red[0],
-                color: theme.colors.red[9],
-              },
-            },
-          };
-        }
-        return {
-          label: {
-            fontFamily: "inherit",
-            fontWeight: 500,
-            fontSize: "inherit",
-            zIndex: 0,
-            color: "inherit",
-            textAlign: "left",
-            marginBottom: "0.5rem",
-          },
-          input: {
-            borderRadius: 5,
-            height: 45,
-            fontSize: "inherit",
-          },
-        };
-      },
-    },
 
     PasswordInput: {
       styles: (
