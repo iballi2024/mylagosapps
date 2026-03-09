@@ -1,71 +1,71 @@
-"use client";
+// "use client";
 
-import { environment } from "@/src/app/environment/environment";
+// import { environment } from "@/src/app/environment/environment";
 
-interface PaystackPopSetupConfig {
-  key: string;
-  email: string;
-  amount: number;
-  currency: string;
-  callback: (response: { reference: string }) => void;
-  onClose: () => void;
-}
+// interface PaystackPopSetupConfig {
+//   key: string;
+//   email: string;
+//   amount: number;
+//   currency: string;
+//   callback: (response: { reference: string }) => void;
+//   onClose: () => void;
+// }
 
-interface PaystackPopHandler {
-  openIframe: () => void;
-}
+// interface PaystackPopHandler {
+//   openIframe: () => void;
+// }
 
-interface PaystackPop {
-  setup: (config: PaystackPopSetupConfig) => PaystackPopHandler;
-}
+// interface PaystackPop {
+//   setup: (config: PaystackPopSetupConfig) => PaystackPopHandler;
+// }
 
-declare global {
-  interface Window {
-    PaystackPop?: PaystackPop;
-  }
-}
+// declare global {
+//   interface Window {
+//     PaystackPop?: PaystackPop;
+//   }
+// }
 
-export default function PaystackButton({
-  email,
-  amount,
-}: {
-  email: string;
-  amount: number;
-}) {
-  const pay = () => {
-    const PaystackPop = window.PaystackPop;
+// export default function PaystackButton({
+//   email,
+//   amount,
+// }: {
+//   email: string;
+//   amount: number;
+// }) {
+//   const pay = () => {
+//     const PaystackPop = (window as any).PaystackPop;
 
-    if (!PaystackPop) {
-      alert("Payment system not loaded yet");
-      return;
-    }
+//     if (!PaystackPop) {
+//       alert("Payment system not loaded yet");
+//       return;
+//     }
 
-    const handler = PaystackPop.setup({
-      key: environment.paystack.publicKey,
-      email: email,
-      amount: amount * 100, // convert to kobo
-      currency: "NGN",
+//     const handler = PaystackPop.setup({
+//       key: environment.paystack.publicKey,
+//       email: email,
+//       amount: amount * 100, // convert to kobo
+//       currency: "NGN",
 
-      callback: function (response: { reference: string }) {
-        console.log("Payment reference:", response.reference);
+//       callback: function (response: { reference: string }) {
+//         console.log("Payment reference:", response.reference);
 
-        alert("Payment successful");
-      },
+//         alert("Payment successful");
+//       },
 
-      onClose: function () {
-        console.log("Payment cancelled");
-      },
-    });
+//       onClose: function () {
+//         console.log("Payment cancelled");
+//       },
+//     });
 
-    handler.openIframe();
-  };
+//     handler.openIframe();
+//   };
 
-  return (
-    <button
-      onClick={pay}
-      className="cursor-pointer bg-green-600 text-white px-6 py-3 rounded-lg"
-    >
-      Pay ₦{amount}
-    </button>
-  );
-}
+//   return (
+//     <button
+//       onClick={pay}
+//       className="cursor-pointer bg-green-600 text-white px-6 py-3 rounded-lg"
+//     >
+//       Pay ₦{amount}
+//     </button>
+//   );
+// }

@@ -3,10 +3,10 @@ import dynamic from "next/dynamic";
 import { environment } from "@/src/app/environment/environment";
 import { Button, Card, Grid, Select, TextInput } from "@mantine/core";
 
-const PaystackButton = dynamic(
-  () => import("react-paystack").then((mod) => mod.PaystackButton),
-  { ssr: false },
-);
+// const PaystackButton = dynamic(
+//   () => import("react-paystack").then((mod) => mod.PaystackButton),
+//   { ssr: false },
+// );
 
 export default function CheckoutForm() {
   const publicKey = environment.paystack.publicKey || "";
@@ -123,7 +123,7 @@ export default function CheckoutForm() {
             </Grid.Col>
           </Grid>
         </form>
-        <PaystackButton {...componentProps} />
+        {/* <PaystackButton {...componentProps} /> */}
       </Card>
     </>
   );
