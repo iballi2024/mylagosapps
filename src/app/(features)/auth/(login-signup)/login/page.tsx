@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Form from "./Form";
 import { useRouter } from "next/navigation";
 import { log } from "@/src/app/helpers/logInConsole";
-import { BadInputError, NotFoundError } from "@/src/app/common";
+import { BadInputError, ForbiddenError, NotFoundError } from "@/src/app/common";
 import { formatJoiFormErrors } from "@/src/app/helpers/formatJoiFormErrors";
 import { useState } from "react";
 
@@ -64,7 +64,7 @@ export default function Login() {
       /**
        *
        */
-      let message = "Failed to create an account!";
+      let message = "Authentication failed!";
       const { response } = (
         error as {
           originalError: {
@@ -91,9 +91,13 @@ export default function Login() {
           "Signup Validation error": response,
         });
         const formformFieldsErrors = formatJoiFormErrors(response.data.error);
-        console.log({ formformFieldsErrors });
         setformFieldsErrors(formformFieldsErrors);
         message = response.data.message;
+      }
+      if (error instanceof ForbiddenError) {
+        log({ "Forbidden error": response });
+        message =
+          response.data.message || "You are not allowed to perform this action";
       }
       toast.error(message);
     }

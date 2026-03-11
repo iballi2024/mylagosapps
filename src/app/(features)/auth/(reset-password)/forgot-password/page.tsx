@@ -10,47 +10,25 @@ import { log } from "@/src/app/helpers/logInConsole";
 import { toast } from "react-toastify";
 import { Box, Text } from "@mantine/core";
 import { ResponseData } from "../../(login-signup)/signup/response-data.type";
-import { useRouter, useSearchParams } from "next/navigation";
 
 const _authSvc = createAuthService();
 
 export type FormValues = {
-  newPassword: string;
-  confirm_password: string;
+  email: string;
 };
 
-export default function ResetPassword() {
-
-/**React Hooks */
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  const navigate = useRouter();
-
+export default function ForgotPassword() {
   const [formFieldsErrors, setformFieldsErrors] = useState<string[]>([]);
   const [responseData, setResponseData] = useState<ResponseData>();
 
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      newPassword: "",
-      confirm_password: ""
+      email: "",
     },
 
     validate: {
-      newPassword: (value) => {
-        if (!value) {
-          return "Password is required";
-        }
-        if (value.length < 6) {
-          return "Password must be at least 6 characters";
-        }
-        return null;
-      },
-      confirm_password: (value)=>{
-        if(form.values.newPassword !== form.values.confirm_password){
-          return "Passwords do not match"
-        }
-      }
+      email: isEmail("Invalid email"),
     },
   });
 
@@ -62,15 +40,10 @@ export default function ResetPassword() {
 
   const handleSubmit = async (values: FormValues) => {
     console.log(values);
-    if(values.newPassword !== values.confirm_password){
-      setformFieldsErrors(["Passwords do not match"]);
-      return;
-    }
     resetformFieldsErrors();
     try {
-      const response = (await _authSvc.resetPassword({
-        newPassword: values.newPassword,
-        token: token as string
+      const response = (await _authSvc.forgotPassword({
+        email: values.email,
       })) as ResponseData;
       setResponseData(response);
       console.log({ response });
@@ -79,7 +52,6 @@ export default function ResetPassword() {
       );
       form.reset();
       setResponseData(response);
-      navigate.push("/auth/login");
     } catch (error: unknown) {
       console.log({ error });
       /**
@@ -103,13 +75,13 @@ export default function ResetPassword() {
 
       if (error instanceof NotFoundError) {
         log({
-          "Reset password request not found": response,
+          "Forgot password request not found": response,
         });
         message = "Request not found";
       }
       if (error instanceof BadInputError) {
         log({
-          "Reset password Validation error": response,
+          "Forgot password Validation error": response,
         });
         const formformFieldsErrors = formatJoiFormErrors(response.data.error);
         setformFieldsErrors(formformFieldsErrors);
@@ -123,12 +95,13 @@ export default function ResetPassword() {
     <>
       <div className="flex flex-col  min-h-screen items-center justify-center p-2">
         <AuthCard
-          title={!responseData?.message ? "Reset password": "Request sent"}
+          title={!responseData?.message ? "Forgot password": "Request sent"}
           titleAlign={!responseData?.message ? "left" : "center"}
           tagline={
             !responseData?.message &&
             <>
-              Enter your new password
+              Enter your email address and we&apos;ll send you a link to reset
+              your password.
             </>
           }
           isBackHistory={!responseData?.message}

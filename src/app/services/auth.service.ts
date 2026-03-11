@@ -44,6 +44,33 @@ export class AuthService {
     return this.dataSvc.createData(payload, "/login");
   }
 
+  async forgotPassword(payload: Record<string, unknown>) {
+    if (!environment.isDevelopment) {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      return {
+        status: "success",
+        "success": true,
+        "message": "If the email is registered, a password reset link has been sent.",
+        "data": null,
+        "error": null
+      };
+    }
+    return this.dataSvc.createData(payload, "/forgot-password");
+  }
+  async resetPassword(payload: Record<string, unknown>) {
+    if (!environment.isDevelopment) {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      return {
+        status: "success",
+        data: {
+          message: "Password reset successful. Please check your email for further instructions.",
+        },
+      };
+    }
+    return this.dataSvc.createData(payload, "/reset-password");
+  }
+
+
   async activateAccount(token: string) {
     if (environment.isDevelopment) {
       await new Promise((resolve) => setTimeout(resolve, 3000));

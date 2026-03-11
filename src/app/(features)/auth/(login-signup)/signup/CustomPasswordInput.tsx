@@ -3,12 +3,20 @@ import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function CustomPasswordInput({ form }: { form: any }) {
+export default function CustomPasswordInput({
+  form,
+  label,
+  identifier,
+}: {
+  form: any;
+  label?: string;
+  identifier: string;
+}) {
   const [isShow, setIsShow] = useState(false);
   return (
     <>
       <div className="flex items-center justify-between">
-        <label htmlFor="password">Password</label>
+        <label htmlFor={identifier}>{label || "Password"}</label>
 
         <button
           type="button"
@@ -33,12 +41,12 @@ export default function CustomPasswordInput({ form }: { form: any }) {
         </button>
       </div>
       <Input
-        type={isShow ? "text" : "password"}
-        label="Password"
-        id="password"
+        type={isShow ? "text" : identifier}
+        label={label}
+        id={identifier}
         required
-        key={form.key("password")}
-        {...form.getInputProps("password")}
+        key={form.key(identifier)}
+        {...form.getInputProps(identifier)}
       />
     </>
   );

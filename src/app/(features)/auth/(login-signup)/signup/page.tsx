@@ -145,7 +145,6 @@ export default function SignUp() {
           "Signup Validation error": response,
         });
         const formformFieldsErrors = formatJoiFormErrors(response.data.error);
-        console.log({ formformFieldsErrors });
         setformFieldsErrors(formformFieldsErrors);
         message = response.data.message;
       }

@@ -46,7 +46,7 @@ export default function Form({
             />
           </Grid.Col>
           <Grid.Col span={12}>
-            <CustomPasswordInput form={form} />
+            <CustomPasswordInput form={form} identifier="password" label="Password" />
             {/* <Text component="small" fz={14}>
                 Your password must be at least 8 characters long, contain at
                 least one uppercase letter, one lowercase letter, and one

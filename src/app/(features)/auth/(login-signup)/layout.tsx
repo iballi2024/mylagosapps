@@ -22,7 +22,7 @@ export default function LoginSignupLayout({
         <div className="hidden md:flex col-span-12 md:basis-[48%] bg-dark-9/60 place-content-center place-items-center">
           Sliders and other controls
         </div>
-        <div className="col-span-12 md:basis-[52%] flex flex-col place-content-center items-center">
+        <div className="col-span-12 md:basis-[52%] flex flex-col place-content-center items-center p-2">
           {children}
         </div>
       </div>
