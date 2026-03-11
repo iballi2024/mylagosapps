@@ -4,35 +4,20 @@ import PrimaryBtn from "@/src/app/shared/components/buttons/PrimaryBtn";
 import CustomPasswordInput from "./CustomPasswordInput";
 import { UseFormReturnType } from "@mantine/form";
 import { FormValues } from "./page";
-
+import FormFieldsError from "@/src/app/shared/components/FormFieldsError";
 
 export default function Form({
-  setIsActivationRequestSent,
-  errorFields,
+  formFieldsErrors,
   handleSubmit,
-  form
-
+  form,
 }: {
-  setIsActivationRequestSent: React.Dispatch<React.SetStateAction<boolean>>;
-  // setIsActivationRequestSent: (payload: boolean) => void;
-  errorFields: string[];
+  formFieldsErrors: string[];
   handleSubmit: (values: FormValues) => Promise<void>;
   form: UseFormReturnType<FormValues>;
 }) {
   return (
     <>
-      {errorFields.length > 0 && (
-        <Box
-          component="ul"
-          className="list-disc list-inside text-red-500 bg-red-100 p-2 rounded text-sm mb-4"
-        >
-          {errorFields.map((err, index) => (
-            <Box component="li" key={index}>
-              {err}
-            </Box>
-          ))}
-        </Box>
-      )}
+      <FormFieldsError formFieldsErrors={formFieldsErrors} />
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <Grid gutter={22}>
           <Grid.Col span={12}>

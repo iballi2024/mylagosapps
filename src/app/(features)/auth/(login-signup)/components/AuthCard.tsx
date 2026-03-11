@@ -1,6 +1,8 @@
 import { Card, Image, Text, Title } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
+// import { IoIosArrowBack } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io";
 
 export default function AuthCard({
   title,
@@ -17,9 +19,14 @@ export default function AuthCard({
         <div className="max-w-16">
           <Image src="/favicon.svg" width={53} height={50} alt="Logo" />
         </div>
+        <div className="flex items-center gap-2">
+          <button aria-label="go back" className="cursor-pointer">
+            <IoMdArrowBack size={20}/>
+          </button>
         <Title order={1} fw={400} fz={25}>
           {title}
         </Title>
+        </div>
         {
             tagline && (
                 <Text>

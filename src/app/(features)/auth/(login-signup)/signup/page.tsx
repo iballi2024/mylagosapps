@@ -5,14 +5,14 @@ import { Box, Space, Text } from "@mantine/core";
 import { useState } from "react";
 import { isEmail, useForm } from "@mantine/form";
 import { toast } from "react-toastify";
-import { BadInputError, NotFoundError } from "@/src/app/common";
+import { BadInputError, ConflictError, NotFoundError } from "@/src/app/common";
 import { ResponseData } from "./response-data.type";
 import { formatJoiFormErrors } from "@/src/app/helpers/formatJoiFormErrors";
 
 import Form from "./Form";
 import { createAuthService } from "@/src/app/services/auth.service";
+import { log } from "@/src/app/helpers/logInConsole";
 const _authSvc = createAuthService();
-
 
 export type FormValues = {
   email: string;
@@ -22,14 +22,13 @@ export type FormValues = {
   confirm_password: string;
 };
 
-
 export default function SignUp() {
   const [isActivationRequestSent, setIsActivationRequestSent] = useState(false);
 
   console.log({ isActivationRequestSent });
 
-  const [responseData, setResponseData] = useState<ResponseData>(
-    /**
+  const [responseData, setResponseData] = useState<ResponseData>();
+  /**
      * {
     success: true,
     message:
@@ -40,9 +39,8 @@ export default function SignUp() {
     error: null,
   }
      */
-  );
 
-  const [errorFields, setErrorFields] = useState<string[]>([]);
+  const [formFieldsErrors, setformFieldsErrors] = useState<string[]>([]);
 
   const form = useForm({
     mode: "uncontrolled",
@@ -69,7 +67,14 @@ export default function SignUp() {
     },
   });
 
+  const resetformFieldsErrors = () => {
+    if (formFieldsErrors.length > 0) {
+      setformFieldsErrors([]);
+    }
+  };
+
   const handleSubmit = async (values: FormValues) => {
+    resetformFieldsErrors();
     console.log(values);
     const payload = {
       email: values.email,
@@ -110,7 +115,10 @@ export default function SignUp() {
       setIsActivationRequestSent(true);
     } catch (error: unknown) {
       console.log({ error });
-      let message = "Sign up failed";
+      /**
+       *
+       */
+      let message = "Failed to create an account!";
       const { response } = (
         error as {
           originalError: {
@@ -127,16 +135,27 @@ export default function SignUp() {
       )?.originalError;
 
       if (error instanceof NotFoundError) {
-        // message = error.message;
-        console.warn("Not found error");
+        log({
+          "Signup request not found": response,
+        });
+        message = "Request not found";
       }
       if (error instanceof BadInputError) {
-        console.warn("Bad input error");
-        const formErrorFields = formatJoiFormErrors(response.data.error);
-        console.log({ formErrorFields });
-        setErrorFields(formErrorFields);
-        toast.error(response.data.message);
+        log({
+          "Signup Validation error": response,
+        });
+        const formformFieldsErrors = formatJoiFormErrors(response.data.error);
+        console.log({ formformFieldsErrors });
+        setformFieldsErrors(formformFieldsErrors);
+        message = response.data.message;
       }
+      if (error instanceof ConflictError) {
+        log({
+          "Signup Conflict error (e.g., email already exists)": response,
+        });
+        message = response.data.message;
+      }
+      toast.error(message);
     }
   };
 
@@ -160,9 +179,7 @@ export default function SignUp() {
             <Text fz={14} c={"#6B7280"} mb={20}>
               {/* Your account has been created. Please check your email and click
               the activation link to verify and activate your account. */}
-              {
-                responseData?.message
-              }
+              {responseData?.message}
             </Text>
 
             <Text fz={14} c={"#6B7280"}>
@@ -171,10 +188,9 @@ export default function SignUp() {
           </Box>
         ) : (
           <Form
-            setIsActivationRequestSent={setIsActivationRequestSent}
-            errorFields={errorFields}
             handleSubmit={handleSubmit}
             form={form}
+            formFieldsErrors={formFieldsErrors}
           />
         )}
       </AuthCard>

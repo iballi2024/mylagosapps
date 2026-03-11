@@ -1,57 +1,23 @@
 "use client";
 import { Grid, Text, TextInput } from "@mantine/core";
 import PrimaryBtn from "@/src/app/shared/components/buttons/PrimaryBtn";
-import { isEmail, useForm } from "@mantine/form";
-import { createAuthService } from "@/src/app/services/auth.service";
-import { toast } from "react-toastify";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { FormValues } from "./page";
+import { UseFormReturnType } from "@mantine/form";
+import FormFieldsError from "@/src/app/shared/components/FormFieldsError";
 
-const _authSvc = createAuthService();
-
-type FormValues = {
-  email: string;
-  password: string;
-};
-
-export default function Form() {
-  const router = useRouter();
-
-  const form = useForm({
-    mode: "uncontrolled",
-    initialValues: {
-      email: "",
-      password: "",
-    },
-
-    validate: {
-      email: isEmail("Invalid email"),
-      password: (value: string): string | null =>
-        value.length >= 8 ? null : "Password must be at least 8 characters",
-    },
-  });
-
-  const handleSubmit = async (values: FormValues) => {
-    console.log(values);
-    try {
-      const response = await _authSvc.login({
-        email: values.email,
-        password: values.password,
-      });
-      console.log({ response });
-      toast.success(
-        response.data.message
-          ? response.data.message
-          : "You are successfully logged in",
-      );
-      form.reset();
-      router.push("/user-account");
-    } catch (error: unknown) {
-      console.error(error);
-    }
-  };
+export default function Form({
+  formFieldsErrors,
+  handleSubmit,
+  form,
+}: {
+  formFieldsErrors: string[];
+  handleSubmit: (values: FormValues) => Promise<void>;
+  form: UseFormReturnType<FormValues>;
+}) {
   return (
     <>
+      <FormFieldsError formFieldsErrors={formFieldsErrors} />
       <form
         // className="mb-20 bg-red-300!"
         onSubmit={form.onSubmit((values) => handleSubmit(values))}

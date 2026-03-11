@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   async login(payload: Record<string, unknown>) {
-    if (environment.isDevelopment) {
+    if (!environment.isDevelopment) {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       return {
         status: "success",
@@ -41,7 +41,7 @@ export class AuthService {
         },
       };
     }
-    return this.dataSvc.createData(payload);
+    return this.dataSvc.createData(payload, "/login");
   }
 
   async activateAccount(token: string) {
@@ -51,7 +51,7 @@ export class AuthService {
       // throw new NotFoundError({
       //   message: "Activation request not found",
       // });
-     
+
 
       throw new BadInputError({
         success: false,
