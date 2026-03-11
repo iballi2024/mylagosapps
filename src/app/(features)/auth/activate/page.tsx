@@ -2,8 +2,8 @@
 import { createAuthService } from "@/src/app/services/auth.service";
 import { Button, Card, Loader, Text, Title } from "@mantine/core";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Activation = {
@@ -15,9 +15,12 @@ const _authSvc = createAuthService();
 
 export default function ActivateAccount() {
   /**React Hooks */
-  const params = useParams();
-  const { token } = params as { token: string };
-  console.log({ token });
+  // const params = useParams();
+  // const { token } = params as { token: string };
+  // console.log({ token });
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
   /**Local states */
   const [isActivating, setIsActivating] = useState(false);
@@ -29,14 +32,12 @@ export default function ActivateAccount() {
     const handleAccountActivation = async () => {
       setIsActivating(true);
       try {
-        // const response = await fetch(`/api/auth/activate/${token}`, {
-        //   method: "POST",
-        // });
-        const response = await _authSvc.activateAccount(token);
+        const response = await _authSvc.activateAccount(token as string);
         console.log({ response });
-        toast.success("Account activated successfully");
+        toast.success(response.message || "Account activated successfully");
         setActivationStatus(Activation.SUCCESSFUL);
       } catch (error) {
+        console.error(error);
         console.error("An error occurred during account activation", error);
         // console.error("Failed to activate account");
         setActivationStatus(Activation.FAILURE);

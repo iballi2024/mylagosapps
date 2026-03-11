@@ -19,6 +19,7 @@ import PageLoader from "./shared/components/PageLoader/Index";
 import Script from "next/script";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { log } from "console";
+import ErrorBoundary from "./common/ErrorBoundary";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -62,15 +63,17 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${geistPoppins.variable} ${geistInter.variable} ${geistMono.variable} antialiased`}
       >
-        <ToastContainer draggable transition={Bounce} />
-        <MantineProvider theme={theme} defaultColorScheme="auto">
-          <GlobalStoreProvider>
-            <Box pos="relative">
-              <PageLoader />
-              {children}
-            </Box>
-          </GlobalStoreProvider>
-        </MantineProvider>
+        <ErrorBoundary fallback={<div>Something went wrong</div>}>
+          <ToastContainer draggable transition={Bounce} />
+          <MantineProvider theme={theme} defaultColorScheme="auto">
+            <GlobalStoreProvider>
+              <Box pos="relative">
+                <PageLoader />
+                {children}
+              </Box>
+            </GlobalStoreProvider>
+          </MantineProvider>
+        </ErrorBoundary>
 
         {/* <Script
           src="https://js.paystack.co/v1/inline.js"
