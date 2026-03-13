@@ -51,7 +51,6 @@ export class DataService {
     }
   }
 
-
   async getData(query?: Record<string, unknown>, urlParam?: string) {
     try {
       const response = await axiosInstance.get(
@@ -65,9 +64,12 @@ export class DataService {
   }
 
   handleError(error: unknown) {
-    log({ "Error! ": error }, "error");
+    // log({ "Error! ": error }, "error");
+    console.log({ "handleError! ": error });
 
     if (axios.isAxiosError(error)) {
+      // log({ Axios: error }, "error");
+      console.log({ Axios: error });
       if (error.response) {
         switch (error.response.status) {
           case 400:
@@ -75,6 +77,8 @@ export class DataService {
               ...error,
               message:
                 error.response?.data?.message || error.message || "Bad Request",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           case 401:
             throw new UnauthorizedError({
@@ -83,24 +87,32 @@ export class DataService {
                 error.response?.data?.message ||
                 error.message ||
                 "Unauthorized",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           case 403:
             throw new ForbiddenError({
               ...error,
               message:
                 error.response?.data?.message || error.message || "Forbidden",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           case 404:
             throw new NotFoundError({
               ...error,
               message:
                 error.response?.data?.message || error.message || "Not Found",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           case 409:
             throw new ConflictError({
               ...error,
               message:
                 error.response?.data?.message || error.message || "Conflict",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           case 429:
             throw new TooManyRequestsError({
@@ -109,6 +121,8 @@ export class DataService {
                 error.response?.data?.message ||
                 error.message ||
                 "Too many request",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
           default:
             throw new AppError({
@@ -117,13 +131,16 @@ export class DataService {
                 error.response?.data?.message ||
                 error.message ||
                 "An unexpected error occurred",
+              data: error.response?.data,
+              error: error.response?.data?.error,
             });
         }
       }
     }
 
     if (error instanceof ApiError) {
-      log({ ApiError: error }, "error");
+      // log({ ApiError: error }, "error");
+      console.log({ ApiError: error });
       if (error.statusCode === 400) {
         throw new BadInputError({
           ...error,

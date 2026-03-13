@@ -1,4 +1,17 @@
 export interface ServerError {
+  data: unknown;
+  message: string;
+  success: boolean;
+  error: string | string[];
+}
+
+export type OriginalError = {
+  originalError: ServerError;
+};
+
+/**
+ * 
+ * export interface ServerError {
   status: string;
   error_description: string;
   error: string;
@@ -10,3 +23,5 @@ export interface ServerError {
 export type OriginalError = {
   originalError: ServerError;
 };
+
+ */

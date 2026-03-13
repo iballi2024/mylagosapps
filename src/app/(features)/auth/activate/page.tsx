@@ -1,5 +1,11 @@
 "use client";
+import { BadInputError } from "@/src/app/common/bad-input-error";
+import { NotFoundError } from "@/src/app/common/not-found-error";
+import { formatJoiFormErrors } from "@/src/app/helpers/formatJoiFormErrors";
+import { log } from "@/src/app/helpers/logInConsole";
+import { OriginalError } from "@/src/app/models/types/server-error";
 import { createAuthService } from "@/src/app/services/auth.service";
+import PageResponseCard from "@/src/app/shared/components/PageResponseCard";
 import { Button, Card, Loader, Text, Title } from "@mantine/core";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -27,6 +33,8 @@ export default function ActivateAccount() {
   const [activationStatus, setActivationStatus] = useState<
     (typeof Activation)[keyof typeof Activation] | null
   >(null);
+  const [activationResponseMessage, setActivationResponseMessage] =
+    useState<string>("");
 
   useEffect(() => {
     const handleAccountActivation = async () => {
@@ -34,12 +42,37 @@ export default function ActivateAccount() {
       try {
         const response = await _authSvc.activateAccount(token as string);
         console.log({ response });
-        toast.success(response.message || "Account activated successfully");
+        setActivationResponseMessage(
+          response.message || "Account activated successfully",
+        );
+        toast.success(
+          response.message ||
+            "Your account has been activated. You can now log in.",
+        );
         setActivationStatus(Activation.SUCCESSFUL);
       } catch (error) {
-        console.error(error);
-        console.error("An error occurred during account activation", error);
-        // console.error("Failed to activate account");
+        let message = "Failed to activate account!";
+        log({ "An error occurred during account activation": error });
+
+        const response = (error as OriginalError)?.originalError;
+
+        if (error instanceof NotFoundError) {
+          log({
+            "Activation request not found": response,
+          });
+          message = response?.message || "Request not found";
+        }
+        if (error instanceof BadInputError) {
+          log({
+            "Activation Validation error": response,
+          });
+          message = response?.message || "Invalid or expired activation token";
+        }
+
+        toast.error(message);
+        setActivationResponseMessage(
+          message || "Your activation request failed. Please try again.",
+        );
         setActivationStatus(Activation.FAILURE);
       } finally {
         setIsActivating(false);
@@ -54,49 +87,49 @@ export default function ActivateAccount() {
   return (
     <>
       <div className="flex items-center justify-center h-screen p-2">
-        {!isActivating ? (
-          <>
-            <Card
-              shadow="sm"
-              padding="xl"
-              radius="lg"
-              withBorder
-              className="w-full max-w-md"
-            >
-              {
-                activationStatus === Activation.SUCCESSFUL ? (
-                  <>
-                    <Title ta={"center"} fz={30} mb={5}>
-                      Account Activated!
-                    </Title>
-                    <Text ta={"center"} mb={20}>
-                      Your account has been successfully activated. You can now
-                      log in and start using our services.
-                    </Text>
-                    <Button component={Link} href={"/auth/login"} size="lg">
-                      Go to Login
-                    </Button>
-                  </>
-                ) : (
-                  <>Failed to activate</>
-                )
-
-                //   (
-                // <Title ta={"center"} fz={30} mb={5}>
-                //   Account Activated!
-                // </Title>
-                // <Text ta={"center"} mb={20}>
-                //   Your account has been successfully activated. You can now log in
-                //   and start using our services.
-                // </Text>
-                // <Button component={Link} href={"/auth/login"} size="lg">
-                //   Go to Login
-                // </Button>) : (<></>)
-              }
-            </Card>
-          </>
+        {isActivating ? (
+          <Loader size="xl" variant="dots" color="#0FA958" />
         ) : (
-          <Loader size="xl" variant="dots" />
+          <Card
+            shadow="sm"
+            padding="xl"
+            radius="lg"
+            withBorder
+            className="w-full max-w-md"
+          >
+            {activationStatus === Activation.SUCCESSFUL ? (
+              <>
+                <PageResponseCard
+                  title="Account Activated!"
+                  message={
+                    <>
+                      <Text mb={10}>{activationResponseMessage}</Text>
+                    </>
+                  }
+                  messageType="SUCCESS"
+                  isCTA={true}
+                  ctaUrl={"/auth/login"}
+                  isCtaIcon={false}
+                  ctaTitle="Login to continue"
+                />
+              </>
+            ) : (
+              <>
+                <PageResponseCard
+                  title="Activation Failed!"
+                  message={
+                    <>
+                      <Text mb={10}>{activationResponseMessage}</Text>
+                    </>
+                  }
+                  messageType="FAILURE"
+                  isCTA={true}
+                  ctaUrl={"/auth/login"}
+                  isCtaIcon={false}
+                />
+              </>
+            )}
+          </Card>
         )}
       </div>
     </>

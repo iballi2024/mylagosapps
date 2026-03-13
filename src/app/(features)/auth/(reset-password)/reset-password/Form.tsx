@@ -23,7 +23,7 @@ export default function Form({
         // className="mb-20 bg-red-300!"
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
-        <Grid gutter={22}>
+        <Grid gutter={20}>
           <Grid.Col span={12}>
             {/* <TextInput
               type="password"
@@ -46,12 +46,11 @@ export default function Form({
           <Grid.Col span={12}>
             <PrimaryBtn
               type="submit"
-              title="Send"
+              title="Reset Password"
               size="lg"
               fullWidth={true}
               loading={form.submitting}
               disabled={form.submitting}
-              className="mt-6"
             />
           </Grid.Col>
         </Grid>

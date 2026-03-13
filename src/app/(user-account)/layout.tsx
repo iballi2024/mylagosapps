@@ -1,3 +1,4 @@
+import { ProtectedRoute } from "../common/ProtectedRoute";
 import Toolbar from "../shared/components/Toolbar/Index";
 
 export default function UserAccountLayout({
@@ -9,7 +10,7 @@ export default function UserAccountLayout({
     <>
       {/* UserAccountLayout */}
       <Toolbar />
-      {children}
+      <ProtectedRoute>{children}</ProtectedRoute>
     </>
   );
 }

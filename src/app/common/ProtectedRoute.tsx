@@ -4,6 +4,7 @@
 // import PageLoader from "@/app/shared/components/PageLoader";
 import { usePathname, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useRef } from "react";
+import { createUserService } from "../services/user.service";
 // import { useSelector } from "react-redux";
 
 // Define the context value type
@@ -13,8 +14,10 @@ interface ProtectedRouteContextType {
 
 // Provide a default value (use null if unavailable initially)
 const ProtectedRouteContext = createContext<ProtectedRouteContextType | null>(
-  null
+  null,
 );
+
+const _userSvc = createUserService();
 
 export const ProtectedRoute = ({ children }: any) => {
   // const isPageLoading = useSelector((state: any) => state.UI?.isPageLoading);
@@ -27,18 +30,19 @@ export const ProtectedRoute = ({ children }: any) => {
   // const _userSvc = useRef(new DataService("/user/current"));
 
   useEffect(() => {
-    // const getCurrentUser = async () => {
-    //   try {
-    //     const currentUser = await _userSvc.current.getData();
-    //     if (currentUser) return;
-    //     router.push(`/auth/login?redirectTo=${encodeURIComponent(pathname)}`);
-    //   } catch (error: any) {
-    //     if (error) {
-    //       router.push(`/auth/login?redirectTo=${encodeURIComponent(pathname)}`);
-    //     }
-    //   }
-    // };
-    // getCurrentUser();
+    const getCurrentUser = async () => {
+      try {
+        const currentUser = await _userSvc.getCurrentUser();
+        console.log({currentUser})
+        if (currentUser) return;
+        router.push(`/auth/login?redirectTo=${encodeURIComponent(pathname)}`);
+      } catch (error: any) {
+        if (error) {
+          router.push(`/auth/login?redirectTo=${encodeURIComponent(pathname)}`);
+        }
+      }
+    };
+    getCurrentUser();
     return () => {};
   }, [pathname, router]);
 

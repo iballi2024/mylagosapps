@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
 
+  // reactStrictMode: true, // this stops api calls being made twice - Ibrahim Alli
   
   /**Redirecting pages */
   async redirects() {

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import AuthCard from "../components/AuthCard";
-import { Box, Space, Text } from "@mantine/core";
+import { Box, Button, Image, Space, Text } from "@mantine/core";
 import { useState } from "react";
 import { isEmail, useForm } from "@mantine/form";
 import { toast } from "react-toastify";
@@ -12,6 +12,9 @@ import { formatJoiFormErrors } from "@/src/app/helpers/formatJoiFormErrors";
 import Form from "./Form";
 import { createAuthService } from "@/src/app/services/auth.service";
 import { log } from "@/src/app/helpers/logInConsole";
+import { FaHome } from "react-icons/fa";
+import { IoHomeOutline } from "react-icons/io5";
+import { OriginalError } from "@/src/app/models/types/server-error";
 const _authSvc = createAuthService();
 
 export type FormValues = {
@@ -119,20 +122,8 @@ export default function SignUp() {
        *
        */
       let message = "Failed to create an account!";
-      const { response } = (
-        error as {
-          originalError: {
-            response: {
-              data: {
-                data: unknown;
-                message: string;
-                success: boolean;
-                error: string[];
-              };
-            };
-          };
-        }
-      )?.originalError;
+      const response = (error as OriginalError)?.originalError;
+      console.log({ response });
 
       if (error instanceof NotFoundError) {
         log({
@@ -144,15 +135,17 @@ export default function SignUp() {
         log({
           "Signup Validation error": response,
         });
-        const formformFieldsErrors = formatJoiFormErrors(response.data.error);
-        setformFieldsErrors(formformFieldsErrors);
-        message = response.data.message;
+        if (response?.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
+        message = response?.message || "Invalid email or password";
       }
       if (error instanceof ConflictError) {
         log({
           "Signup Conflict error (e.g., email already exists)": response,
         });
-        message = response.data.message;
+        message = response?.message || "Invalid email or password";
       }
       toast.error(message);
     }
@@ -163,11 +156,14 @@ export default function SignUp() {
       <Space h={50} />
       <AuthCard
         title="Create an account"
-        tagline={
+        foot={
           !isActivationRequestSent && (
-            <>
-              Already have an account? <Link href="/auth/login">Log in</Link>
-            </>
+            <Text ta={"center"} mt={6}>
+              Already have an account?{" "}
+              <Link href="/auth/login" className="font-semibold">
+                Log in
+              </Link>
+            </Text>
           )
         }
       >
@@ -175,15 +171,43 @@ export default function SignUp() {
 
         {isActivationRequestSent && responseData?.success ? (
           <Box>
-            <Text fz={14} c={"#6B7280"} mb={20}>
-              {/* Your account has been created. Please check your email and click
+            <Box mb={50} display={"flex"} flex={"center"}>
+              <Box w={70} mx={"auto"}>
+                <Image
+                  src="/assets/icons/icon-open-envelope.svg"
+                  width={96}
+                  height={99}
+                  alt="Email has been sent"
+                />
+              </Box>
+            </Box>
+            <Box c={"#1E1E1E"} ta={"center"}>
+              <Text mb={10}>
+                {/* Your account has been created. Please check your email and click
               the activation link to verify and activate your account. */}
-              {responseData?.message}
-            </Text>
+                {responseData?.message}
+              </Text>
 
-            <Text fz={14} c={"#6B7280"}>
-              If you don’t see the email, check your spam or junk folder.
-            </Text>
+              <Text>
+                If you don’t see the email, check your spam or junk folder.
+              </Text>
+            </Box>
+            <Button
+              component="a"
+              href="/"
+              mt={30}
+              fullWidth={true}
+              size={"lg"}
+              radius={"lg"}
+              variant={"outline"}
+              color="primary"
+              className="items-center gap-4"
+            >
+              <Box component="span" display={"flex"} className="gap-2">
+                Go Back to Home
+                <IoHomeOutline size={16} />
+              </Box>
+            </Button>
           </Box>
         ) : (
           <Form

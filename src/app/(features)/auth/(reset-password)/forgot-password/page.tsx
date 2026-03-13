@@ -10,6 +10,7 @@ import { log } from "@/src/app/helpers/logInConsole";
 import { toast } from "react-toastify";
 import { Box, Text } from "@mantine/core";
 import { ResponseData } from "../../(login-signup)/signup/response-data.type";
+import { OriginalError } from "@/src/app/models/types/server-error";
 
 const _authSvc = createAuthService();
 
@@ -58,20 +59,7 @@ export default function ForgotPassword() {
        *
        */
       let message = "Failed to create an account!";
-      const { response } = (
-        error as {
-          originalError: {
-            response: {
-              data: {
-                data: unknown;
-                message: string;
-                success: boolean;
-                error: string[];
-              };
-            };
-          };
-        }
-      )?.originalError;
+      const { response } = (error as OriginalError)?.originalError;
 
       if (error instanceof NotFoundError) {
         log({
@@ -83,8 +71,10 @@ export default function ForgotPassword() {
         log({
           "Forgot password Validation error": response,
         });
-        const formformFieldsErrors = formatJoiFormErrors(response.data.error);
-        setformFieldsErrors(formformFieldsErrors);
+        if (response.data.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.data.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
         message = response.data.message;
       }
       toast.error(message);
@@ -95,14 +85,16 @@ export default function ForgotPassword() {
     <>
       <div className="flex flex-col  min-h-screen items-center justify-center p-2">
         <AuthCard
-          title={!responseData?.message ? "Forgot password": "Request sent"}
+          // title={!responseData?.message ? "Forgot password": "Request sent"}
+          title={"Forgot password"}
           titleAlign={!responseData?.message ? "left" : "center"}
           tagline={
-            !responseData?.message &&
-            <>
-              Enter your email address and we&apos;ll send you a link to reset
-              your password.
-            </>
+            !responseData?.message && (
+              <>
+                Enter your email address and we&apos;ll send you a link to reset
+                your password.
+              </>
+            )
           }
           isBackHistory={!responseData?.message}
         >

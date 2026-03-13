@@ -5,11 +5,20 @@ import { isEmail, useForm } from "@mantine/form";
 import { createAuthService } from "@/src/app/services/auth.service";
 import { toast } from "react-toastify";
 import Form from "./Form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { log } from "@/src/app/helpers/logInConsole";
-import { BadInputError, ForbiddenError, NotFoundError } from "@/src/app/common";
+import {
+  BadInputError,
+  ForbiddenError,
+  NotFoundError,
+  UnauthorizedError,
+} from "@/src/app/common";
 import { formatJoiFormErrors } from "@/src/app/helpers/formatJoiFormErrors";
 import { useState } from "react";
+import { Text } from "@mantine/core";
+import { OriginalError } from "@/src/app/models/types/server-error";
+import { environment } from "@/src/app/environment/environment";
+import { setToken } from "@/src/app/helpers/setToken";
 
 const _authSvc = createAuthService();
 
@@ -20,6 +29,7 @@ export type FormValues = {
 
 export default function Login() {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Get query parameters
 
   const [formFieldsErrors, setformFieldsErrors] = useState<string[]>([]);
 
@@ -44,60 +54,86 @@ export default function Login() {
   };
 
   const handleSubmit = async (values: FormValues) => {
-    console.log(values);
+    const redirectTo = searchParams.get("redirectTo") || "/user-account"; // Default to dashboard if no `redirectTo`
     resetformFieldsErrors();
     try {
       const response = await _authSvc.login({
         identifier: values.email,
         password: values.password,
       });
-      console.log({ response });
+      log({ response });
+      setToken(response.data.token);
+
+      /**
+       * {
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJmcmVkcmlja2JkbkBnbWFpbC5jb20iLCJpYXQiOjE3NzMzOTU3NDMsImV4cCI6MTc3MzM5OTM0M30.Vzch7bLTDmVmJ4TvbY6Xwk--q0-zcQvwZTHboEIZi88",
+        "user": {
+            "id": 1,
+            "fullName": "Ayokunle Updated",
+            "email": "fredrickbdn@gmail.com",
+            "phone": "08123456789"
+        }
+    },
+    "error": null
+}
+       */
       toast.success(
         response.data.message
           ? response.data.message
           : "You are successfully logged in",
       );
       form.reset();
-      router.push("/user-account");
+      router.push(redirectTo);
     } catch (error: unknown) {
-      console.log({ error });
-      /**
-       *
-       */
+      log({ error });
       let message = "Authentication failed!";
-      const { response } = (
-        error as {
-          originalError: {
-            response: {
-              data: {
-                data: unknown;
-                message: string;
-                success: boolean;
-                error: string[];
-              };
-            };
-          };
-        }
-      )?.originalError;
+      const response = (error as OriginalError)?.originalError;
+      console.group({ response, is: error instanceof NotFoundError });
 
       if (error instanceof NotFoundError) {
         log({
-          "Signup request not found": response,
+          "Login request": message,
+          REQUEST: "NotFoundError",
         });
-        message = "Request not found";
+        if (response.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
+        message = response.message || "Login request not found";
+      }
+      if (error instanceof UnauthorizedError) {
+        log({
+          "Login request": message,
+          REQUEST: "UnauthorizedError",
+        });
+        if (response.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
+        message = response.message || "Login request not found";
       }
       if (error instanceof BadInputError) {
         log({
-          "Signup Validation error": response,
+          "Account Signup": response,
+          REQUEST: "BadInputError",
         });
-        const formformFieldsErrors = formatJoiFormErrors(response.data.error);
-        setformFieldsErrors(formformFieldsErrors);
-        message = response.data.message;
+        if (response.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
+        message = response?.message || "Invalid email or password";
       }
       if (error instanceof ForbiddenError) {
-        log({ "Forbidden error": response });
+        log({ "Forbidden error": response, REQUEST: "ForbiddenError" });
+        if (response.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
+          setformFieldsErrors(formformFieldsErrors);
+        }
         message =
-          response.data.message || "You are not allowed to perform this action";
+          response.message || "You are not allowed to perform this action";
       }
       toast.error(message);
     }
@@ -107,11 +143,13 @@ export default function Login() {
     <>
       <AuthCard
         title="Login"
-        tagline={
-          <>
+        foot={
+          <Text ta={"center"} mt={6}>
             Don&lsquo;t have an account?{" "}
-            <Link href="/auth/signup">Sign up</Link>
-          </>
+            <Link href="/auth/signup" className="font-semibold">
+              Sign up
+            </Link>
+          </Text>
         }
       >
         <div className="mt-6"></div>

@@ -249,7 +249,7 @@ export default function HeroSection() {
   return (
     <section className="hero" ref={ref}>
         <div className="flex flex-col main-wrapper">
-        <div className="min-h-screen grid grid-cols-12 gap-y-8 md:gap-x-4 items-center mt-10">
+        <div className="lg:h-screen lg:max-h-200 | grid grid-cols-12 gap-y-8 md:gap-x-4 items-center mt-10">
           {/* ── LEFT: text column ── */}
           <motion.div
             className="col-span-12 md:col-span-6 order-2 md:order-1"

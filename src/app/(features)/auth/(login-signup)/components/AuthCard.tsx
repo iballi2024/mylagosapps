@@ -9,13 +9,17 @@ export default function AuthCard({
   titleAlign = "left",
   tagline,
   taglineAlign = "left",
+  footAlign = "left",
   isBackHistory = false,
+  foot,
   children,
 }: {
-  title: string;
+  title?: string;
   titleAlign?: "left" | "center" | "right";
   tagline?: React.ReactNode | string;
+  foot?: React.ReactNode | string;
   taglineAlign?: "left" | "center" | "right";
+  footAlign?: "left" | "center" | "right";
   isBackHistory?: boolean;
   children: React.ReactNode;
 }) {
@@ -49,6 +53,11 @@ export default function AuthCard({
           </Text>
         ) : tagline}
         {children}
+        {foot && foot instanceof String ? (
+          <Text c={"#6B7280"} mt={5} ta={footAlign}>
+            {foot}
+          </Text>
+        ) : foot}
       </Card>
     </>
   );
