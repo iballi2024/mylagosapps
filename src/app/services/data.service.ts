@@ -39,7 +39,7 @@ export class DataService {
     this.url = url;
   }
 
-  async createData(payload: Record<string, unknown>, urlParam?: string) {
+  async createData(payload: Record<string, unknown> | undefined, urlParam?: string) {
     try {
       const response = await axiosInstance.post(
         `${this.url}${urlParam || ""}`,

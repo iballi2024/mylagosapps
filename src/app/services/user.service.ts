@@ -12,12 +12,12 @@ export class UserService {
     if (!environment.isDevelopment) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      throw new UnauthorizedError({
-        success: false,
-        message: "User not found",
-        data: null,
-        error: "Invalid credentials",
-      });
+      // throw new UnauthorizedError({
+      //   success: false,
+      //   message: "User not found",
+      //   data: null,
+      //   error: "Invalid credentials",
+      // });
 
       return {
         success: true,

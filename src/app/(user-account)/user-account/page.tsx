@@ -17,7 +17,12 @@ export default function UserAccount() {
   }, []);
   return (
     <>
-      <div className="pt-20">UserAccount</div>
+      <div className="pt-20">
+        <div className="main-wrapper">
+          <h1 className="text-lg font-bold mt-10">Welcome to your account</h1>
+          <p>Here you can manage your account settings.</p>
+        </div>
+      </div>
     </>
   );
 }

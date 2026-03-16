@@ -6,6 +6,9 @@ import { log } from "../../helpers/logInConsole";
 export type AuthStore = {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+
+  isAuthenticated: boolean;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
   
   error: StateError | null;
   setError: (error: StateError | null) => void;
@@ -14,6 +17,9 @@ export type AuthStore = {
 const initialGlobalState: AuthStore = {
   isLoading: false,
   setIsLoading: () => {},
+
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
   
   error: null,
   setError: () => {},
@@ -26,6 +32,7 @@ const AuthStoreProvider = ({
 }: Readonly<{ children: React.ReactNode }>) => {
   //
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [error, setError] = useState<StateError | null>(null);
 
   useEffect(() => {
@@ -42,7 +49,9 @@ const AuthStoreProvider = ({
       value={{
         isLoading,
         error,
+        isAuthenticated,
         setIsLoading,
+        setIsAuthenticated,
         setError,
       }}
     >

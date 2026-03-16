@@ -1,5 +1,6 @@
 "use client";
 import {
+  Card,
   Image,
   MantineProvider,
   useComputedColorScheme,
@@ -13,8 +14,11 @@ import { Button } from "@mantine/core";
 import { primaryButtonTheme } from "../../../theming/mantine-theming/buttons";
 import PrimaryBtn from "../buttons/PrimaryBtn";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/app/context/auth-store";
+import UserMenu from "./UserMenu";
 
 export default function Navbar() {
+  const { isAuthenticated } = useAuth();
   const theme = useMantineTheme();
   const navigate = useRouter();
 
@@ -170,20 +174,34 @@ export default function Navbar() {
 
           {/* Right: Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/auth/login"
-              className="text-[#A6A6A6] hover:text-green-600 font-medium"
-            >
-              Login
-            </Link>
-            {/* <Link
+            {isAuthenticated ? (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="text-[#A6A6A6] hover:text-green-600 font-medium"
+                >
+                  Login
+                </Link>
+                {/* <Link
               href="#"
               className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
             >
               Get Started
             </Link> */}
-            <PrimaryBtn title="Get Started" handleEvent={getStarted} />
-
+                <PrimaryBtn title="Get Started" handleEvent={getStarted} />
+              </>
+            ) : (
+              <>
+                {/* <Link
+                  href="/auth/login"
+                  className="text-[#A6A6A6] hover:text-green-600 font-medium"
+                >
+                  Logout
+                </Link> */}
+                {/* <Button color="danger">Logout</Button> */}
+                <UserMenu />
+              </>
+            )}
             <button
               type="button"
               onClick={toggleColorScheme}
@@ -242,7 +260,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
+        <Card className="md:hidden px-4 pb-4 space-y-2 shadow-sm">
           <a
             href="#"
             className="block py-2 text-[#A6A6A6] hover:text-green-600"
@@ -273,31 +291,39 @@ export default function Navbar() {
           >
             Contact Us
           </a>
-
           <div className="border-t pt-3">
-            <Link
-              href="/auth/login"
-              className="block py-2 text-[#A6A6A6] hover:text-green-600"
-            >
-              Login
-            </Link>
-            {/* <Link
-              href="#"
-              className="block mt-2 bg-green-600 text-white px-4 py-2 rounded-lg text-center hover:bg-green-700"
-            >
-              Download app
-            </Link> */}
-            <Button
-              component="a"
-              href="/auth/signup"
-              color="primary"
-              fullWidth
-              variant="filled"
-            >
-              Get Started
-            </Button>
+            {
+              isAuthenticated ? (
+                <>
+                  <Link
+                    href="/auth/login"
+                    className="block py-2 text-[#A6A6A6] hover:text-green-600"
+                  >
+                    Login
+                  </Link>
+                  {/* <Link
+                href="#"
+                className="block mt-2 bg-green-600 text-white px-4 py-2 rounded-lg text-center hover:bg-green-700"
+              >
+                Download app
+              </Link> */}
+                  <PrimaryBtn title="Get Started" handleEvent={getStarted} />
+                </>
+              ) : (
+                <>
+                  {/* <Link
+                    href="/auth/login"
+                    className="text-[#A6A6A6] hover:text-green-600 font-medium"
+                  >
+                    Logout
+                  </Link> */}
+                  {/* <Button color="danger">Logout</Button> */}
+                  <UserMenu />
+                </>
+              )
+            }
           </div>
-        </div>
+        </Card>
       )}
     </nav>
   );

@@ -5,6 +5,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { createUserService } from "../services/user.service";
+import { useAuth } from "../context/auth-store";
 // import { useSelector } from "react-redux";
 
 // Define the context value type
@@ -21,6 +22,7 @@ const _userSvc = createUserService();
 
 export const ProtectedRoute = ({ children }: any) => {
   // const isPageLoading = useSelector((state: any) => state.UI?.isPageLoading);
+  const { setIsAuthenticated } = useAuth();
   const isPageLoading = false;
 
   /** */
@@ -33,8 +35,11 @@ export const ProtectedRoute = ({ children }: any) => {
     const getCurrentUser = async () => {
       try {
         const currentUser = await _userSvc.getCurrentUser();
-        console.log({currentUser})
-        if (currentUser) return;
+        console.log({ currentUser });
+        if (currentUser) {
+          return setIsAuthenticated(true);
+        }
+        setIsAuthenticated(false);
         router.push(`/auth/login?redirectTo=${encodeURIComponent(pathname)}`);
       } catch (error: any) {
         if (error) {
@@ -44,7 +49,7 @@ export const ProtectedRoute = ({ children }: any) => {
     };
     getCurrentUser();
     return () => {};
-  }, [pathname, router]);
+  }, [pathname, router, setIsAuthenticated]);
 
   return (
     <ProtectedRouteContext.Provider value={{ isPageLoading }}>

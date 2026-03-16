@@ -117,7 +117,7 @@ export default function Login() {
       }
       if (error instanceof BadInputError) {
         log({
-          "Account Signup": response,
+          "Login request": response,
           REQUEST: "BadInputError",
         });
         if (response.error) {

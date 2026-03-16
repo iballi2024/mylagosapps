@@ -28,3 +28,12 @@ export default function PageLoader() {
     </>
   );
 }
+
+
+/**
+ * 
+ * 
+              <Box pos="relative">
+                <PageLoader />
+              </Box>
+ */

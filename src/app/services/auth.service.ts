@@ -41,12 +41,12 @@ export class AuthService {
     if (!environment.isDevelopment) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      throw new NotFoundError({
-        success: false,
-        message: "Login failed",
-        data: null,
-        error: "Invalid credentials",
-      });
+      // throw new NotFoundError({
+      //   success: false,
+      //   message: "Login failed",
+      //   data: null,
+      //   error: "Invalid credentials",
+      // });
 
       // throw new BadInputError({
       //   success: false,
@@ -133,6 +133,10 @@ export class AuthService {
       };
     }
     return this.dataSvc.getData(undefined, `/activate/${token}`);
+  }
+
+  async logout(){
+    return this.dataSvc.createData(undefined, `/logout`);
   }
 }
 
