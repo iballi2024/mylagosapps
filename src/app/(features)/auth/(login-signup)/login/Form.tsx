@@ -2,9 +2,9 @@
 import { Grid, Text, TextInput } from "@mantine/core";
 import PrimaryBtn from "@/src/app/shared/components/buttons/PrimaryBtn";
 import Link from "next/link";
-import { FormValues } from "./page";
 import { UseFormReturnType } from "@mantine/form";
 import FormFieldsError from "@/src/app/shared/components/FormFieldsError";
+import { FormValues } from "./Content";
 
 export default function Form({
   formFieldsErrors,

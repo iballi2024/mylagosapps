@@ -1,5 +1,4 @@
 "use client";
-import dynamic from "next/dynamic";
 import { environment } from "@/src/app/environment/environment";
 import { Button, Card, Grid, Select, TextInput } from "@mantine/core";
 

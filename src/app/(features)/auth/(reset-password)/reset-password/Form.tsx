@@ -1,10 +1,10 @@
 import React from "react";
-import { FormValues } from "./page";
 import { UseFormReturnType } from "@mantine/form";
 import FormFieldsError from "@/src/app/shared/components/FormFieldsError";
 import { Grid, TextInput } from "@mantine/core";
 import PrimaryBtn from "@/src/app/shared/components/buttons/PrimaryBtn";
 import CustomPasswordInput from "../../(login-signup)/signup/CustomPasswordInput";
+import { FormValues } from "./Content";
 
 export default function Form({
   form,

@@ -1,5 +1,6 @@
-import type { StateError } from "@/models/types/state-error.type";
+
 import { createContext, useState } from "react";
+import { StateError } from "../models/types/state-error.type.";
 
 // Define the context value type
 export interface AccountContextType {
@@ -32,7 +33,7 @@ const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   /**Validate loading payload */
-  const setIsLoading = (payload: boolean) => {
+  const handleSetIsLoading = (payload: boolean) => {
     if (typeof payload === "boolean") {
       setIsLoading(payload);
     } else {
@@ -54,7 +55,7 @@ const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     <AccountContext.Provider
       value={{
         isLoading,
-        setIsLoading,
+        setIsLoading:handleSetIsLoading,
         error,
         handleSetError
       }}
