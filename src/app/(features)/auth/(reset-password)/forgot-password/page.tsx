@@ -59,7 +59,7 @@ export default function ForgotPassword() {
        *
        */
       let message = "Failed to create an account!";
-      const { response } = (error as OriginalError)?.originalError;
+      const  response  = (error as OriginalError)?.originalError;
 
       if (error instanceof NotFoundError) {
         log({
@@ -71,11 +71,11 @@ export default function ForgotPassword() {
         log({
           "Forgot password Validation error": response,
         });
-        if (response.data.error) {
-          const formformFieldsErrors = formatJoiFormErrors(response.data.error);
+        if (response.error) {
+          const formformFieldsErrors = formatJoiFormErrors(response.error);
           setformFieldsErrors(formformFieldsErrors);
         }
-        message = response.data.message;
+        message = response.message;
       }
       toast.error(message);
     }
